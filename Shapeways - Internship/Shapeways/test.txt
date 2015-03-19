@@ -1,0 +1,9 @@
+a,b,c,d,e
+b,c,f,g
+a,f,g
+f
+a,g,c,d
+c,d
+a,c,b
+a,g
+a,g,c,b

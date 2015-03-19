@@ -1,0 +1,401 @@
+<html>
+<head>
+  <style type="text/css">
+    .questionContainer
+    {
+      border: 1px solid #000000;
+    }
+    .questionContainer ul
+    {
+
+    }
+    .questionContainer li
+    {
+      padding: 14px;
+    }
+    .invisibleQuestion
+    {
+      display: none;
+    }
+	#question3
+	{
+	  color: blue;
+	}
+	#question5
+	{
+	  margin-top: 15px;
+	  background-image: url("http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2012/3/6/1331051759134/Blue-sky-with-clouds-007.jpg");
+	}
+	#question7
+	{
+	  font-weight: bold;
+	}
+	.instructionContent
+	{
+	  color: #383838;
+	}
+	.inlineStyleExtractor
+	{
+	  display: inline;
+	}
+	.box
+	{
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  margin-top: -128.5px;
+	  margin-left: -250px;
+	  border: 3px solid black;
+	  width: 500px;
+	  height: 257px;
+	  opacity: 0.3;
+	  background-color: beige;
+	}
+	.textInBox
+	{
+	  color: green;
+	}
+  </style>
+  <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+  <script type="text/javascript">
+	function toggleFunc(){
+	if(document.getElementById("myBox").style.visibility == 'visible'){
+		document.getElementById("myBox").style.visibility = "hidden";
+	}
+	else{
+		document.getElementById("myBox").style.visibility = "visible";
+	}
+  }
+  function closeFunc(){
+		document.getElementById("myBox").style.visibility = "hidden";
+  }
+  function alertFunc() {
+    alert("I've done it!");
+	}
+    // Q: Describe what these functions do using line comments
+    function alertValue(value)
+    {
+      window.alert(value);
+    }
+
+    function beginTheTest()
+    {
+      var introduction = document.getElementById("introduction");
+      var theTest = document.getElementById("theTest");
+
+      introduction.style.display = "none";
+
+      theTest.style.display = "block";
+
+    }
+
+
+
+
+
+	YUI().use('node','event','anim', function (Y) {
+
+		var temp = Y.one("#fade");
+
+
+		    var anim1 = new Y.Anim({
+			duration: 3,
+			node: '#introduction',
+			from: { opacity: 1},
+			to: { opacity: 0 },
+
+			});
+			
+		    var anim2 = new Y.Anim({
+			duration: 10,
+			node: '#theTest',
+			from: { opacity: 0},
+			to: { opacity: 1 }
+			});
+
+		temp.on("click", function (e) {
+
+		  anim1.run();
+		  beginTheTest();
+		  anim2.run();
+
+		});
+
+		  
+
+
+	});
+
+  </script>
+  <title>Shapeways.com HTML Test</title>
+</head>
+<body>
+  <div id="introduction">
+    <h1>
+      Shapeways.com HTML Test
+    </h1>
+    <h2>
+      Instructions
+    </h2>
+    <p class="instructionContent">
+      Using the text-editor of your choice, make changes to this HTML document as instructed in the questions below.<br>
+      Each question will be marked with <strong>Q</strong>.<br>
+      Please modify this HTML with your answers (keep all CSS and Javascript in this file).
+      <br><br>
+      Save your test as [yourName]-test.html<br><br>
+      <a href="javascript:void(0);" id="fade" class="fadeOut">Click here to begin the test</a>
+    </p>
+  </div>
+  <style type="text/css">
+    .invisibleQuestion
+    {
+      filter:alpha(opacity=40);
+      -moz-opacity:0.4;
+      opacity:0.4;
+    }
+  </style>
+  <div id="theTest" style="display:none;">
+	  <h2>
+		Questions
+	  </h2>
+	  <div id="questions" class="questionContainer">
+      <ul>
+	  	<li id="question1"><strong>Q:</strong>
+        Add this question to the unordered list shown below.
+		</li>
+        <li id="question2" style="color:blue"><strong>Q:</strong>
+        Make this question blue using an inline style.
+        </li>
+        <li id="question3"><strong>Q:</strong>
+        Make sure this question has a unique id.
+        Make this question blue using an external id selector.
+        </li>
+        <li id="question4"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Feature Question </h3><br>
+        Add a table inside this list item.<br>
+        &mdash;
+        Make 5 rows and 3 columns.<br>
+        &mdash;
+        Give the cells a width of 45px.<br>
+        &mdash;
+        Give the table a border.<br>
+        &mdash;
+        Give the middle cell a red background.<br>
+		<table border="1">
+		<tr>
+		<td width="45 px">a</td>
+		<td width="45 px">b</td>
+		<td width="45 px">c</td>
+		</tr>
+		<tr>
+		<td width="45 px">d</td>
+		<td width="45 px">e</td>
+		<td width="45 px">f</td>
+		</tr>
+		<tr>
+		<td width="45 px">g</td>
+		<td width="45 px" bgcolor="red">h</td>
+		<td width="45 px">i</td>
+		</tr>
+		<tr>
+		<td width="45 px">j</td>
+		<td width="45 px">k</td>
+		<td width="45 px">l</td>
+		</tr>
+		<tr>
+		<td width="45 px">m</td>
+		<td width="45 px">n</td>
+		<td width="45 px">o</td>
+		</tr>
+		</table>
+        </li>
+        <li id="question5"><strong>Q:</strong>
+        Create a link to the URL http://www.shapeways.com/jobs and make the link text &quot;Jobs @ Shapeways&quot;.
+        Give this question a top margin of 15px, and a background image from the internet.<br>
+		 <a href="http://www.shapeways.com/jobs">Jobs @ Shapeways</a> 
+        </li>
+        <li id="question6"><strong>Q:</strong>
+          <h3 class="inlineStyleExtractor"> Feature Question </h3><br>
+          Create a button below this sentence.<br>
+          When the button is clicked, make an alert box appear that says &quot;I&#39;ve done it!&quot;<br>
+		  <button onclick="alertFunc()">Click me!</button>
+        </li>
+        <li id="question7"><strong>Q:</strong>
+          Make this question bold using css.  Use an external class selector to apply the style.
+        </li>
+        <li id="question8"><strong>Q:</strong>
+          Make all elements in the Instructions section dark gray (text-color #383838;) using a single css class selector.
+        </li>
+        <li id="question9"><strong>Q:</strong>
+        
+          Make this question visible.
+
+        </li>
+        <li id="question10"><strong>Q:</strong>
+        <span>
+          Describe the differences between the IE6, IE7, and W3C box models.
+		<textarea rows="2" cols="100">Box model : HTML elements can be visualized as boxes. A smaller box being enclosed in a bigger box.<br>An HTML document can be seen as consisting of - Margin, Border, Padding, Content.
+		</textarea>
+		 <table  border="1">
+		 <tr>
+		 <td>CSS</td>
+		 <td>IE</td>
+		 </tr>
+		 <tr>
+		 <td>The width property corresponds to only the width of the content area.</td>
+		 <td>The width property corresponds to width of the content, padding and border areas.</td>
+		 </tr>
+		 </table> 
+        </span>
+        </li>
+        <li id="question11"><strong>Q:</strong>
+        <span>
+          Extract all inline styles in this test to external class selectors.
+        </span>
+        </li>
+        <li id="question12"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Adventure Question </h3>
+        <ul>
+          <li>
+            Add a semi-transparent box which is centered on the screen.
+          </li>
+          <li>
+            Give the box a 3px black border.
+          </li>
+          <li>
+            Make the background of the box a light-beige.
+          </li>
+          <li>
+            Make the box 500px wide and 257px tall.
+          </li>
+          <li>
+            Include a paragraph of green sample text in the box.
+          </li>
+          <li>
+            <strong>BONUS:</strong>
+            Have a link in the top right corner which closes the box.
+          </li>
+          </ul>
+		  <button onclick="toggleFunc()">Box - Toggle</button>
+		  <div class="box" id="myBox">
+		  <div class="closeButton" id="closeButton" align="right">
+		  <button onclick="closeFunc()">Close</button>
+		  </div>
+			<p class="textInBox">
+				All that is gold does not glitter, Not all those who wander are lost;<br>
+				The old that is strong does not wither, deep roots are not reached by the frost.<br>
+				From the ashes a fire shall be woken, a light from the shadows shall spring;<br>
+				Renewed shall be blade that was broken, the crownless again shall be king.<br>
+			</p>
+		  </div>
+        </li>
+        <li id="question13"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Adventure Question </h3><br>
+          Change the functionality of the &quot;begin the test&quot; link:
+          <ul>
+            <li>
+              use the <strong>YUI javascript library</strong> to animate the introduction box closing.
+            </li>
+            <li>
+              use the <strong>YUI javascript library</strong> to fade the test box in.
+            </li>
+          </ul>
+        </li>
+        <li id="question14"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Feature Question </h3><br>
+        <ol>
+        <li> Show how to include a variable in a page using PHP</li>
+		<textarea rows="5" cols="100">Answer -
+		<?php
+		$varName = "I am a variable";
+		?>
+		</textarea>
+		
+        <li> Show how to loop over a collection of elements in PHP</li>
+		 <textarea rows="5" cols="100">Answer -
+		 foreach($collection as $val) {
+		 // Do stuff
+		 }
+		 </textarea>
+		
+        <li> Show an IF/ELSEIF/ELSE conditional in PHP</li>
+		<textarea rows="5" cols="100">Answer -
+		if ($var1 > $var2) {
+		// Do stuff
+		} elseif ($var1 < $var2) {
+		// Do stuff
+		} else {
+		// Do stuff
+		}
+		</textarea>
+		
+        <li> Show three ways to include content from another file in PHP</li>
+		<textarea rows="5" cols="100">Answer -
+		1) include -
+		<?php
+		include 'somefile.php';
+		?>
+		2)  file_get_contents - 
+		string file_get_contents ( string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]] )
+		filename - Name of the file to read
+		use_include_path - include path
+		context - A valid context resource created with stream_context_create()
+		offset - The offset where the reading starts on the original stream
+		maxlen - Maximum length of data read
+		 3) require -
+		 <?php require 'noFileExists.php';
+		 echo "I have a $color $car.";
+		 ?>
+		</textarea>
+        </ol>
+        </li>
+        <li id="question15"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Adventure Question </h3><br>
+          Describe the MVC design pattern as it applies to web servers - start from initial HTTP request and end with writing the response.
+        <textarea rows="5" cols="100">Answer : 
+Model - Consists of data objects, for ex - a record in the database.
+View - View is what is presented to the user. For example, how an HTML page is rendered.
+Controller - The controller is the master. It decides what is presented to the user. It also can update data objects.
+
+1) User performs an action using the view and initiates a HTTP request.
+2) The Controller receives the HTTP request.
+3) The controller updates the Model if necessary.
+4) It sends out an HTTP response to the user.
+5) The View now displays(renders) the response.
+		</textarea>
+		</li>
+        <li id="question16"><strong>Q:</strong>
+        <h3 class="inlineStyleExtractor"> Feature Question </h3><br>
+          Describe the pros and cons of version control.
+		  <table border="1">
+		  <tr>
+		  <td>Pros :</td>
+		  <td>Cons :</td>
+		  </tr>
+		  <tr>
+		  <td>Can revert back to the last working base in case of a mishap</td>
+		  <td>Overhead - in maintaining each version<br>especially in case of very minimal changes</td>
+		  </tr>
+		  <tr>
+		  <td>Easy to track changes, compare differences, merge codes from mutiple users</td>
+		  <td></td>
+		  </tr>
+		  </table>
+        </li>
+      </ul>
+	  <textarea rows="5" cols="100">References :
+	  http://www.w3schools.com/
+	  https://www.wikipedia.org/
+	  http://php.net/
+	  http://code.tutsplus.com/tutorials/an-introduction-to-yui--net-16746
+	  </textarea>
+	  </div>
+  </div>
+  <style type="text/css">
+    .invisibleQuestion
+    {
+      color: #FFFFFF;
+    }
+  </style>
+</body>
+</html>
