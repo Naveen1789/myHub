@@ -1,0 +1,74 @@
+DROP TABLE IF EXISTS stockData;
+create table stockData (col_value STRING);
+
+LOAD DATA LOCAL INPATH '/home/outflanker/Naveen/data' OVERWRITE INTO TABLE stockData;
+
+DROP TABLE IF EXISTS stocks;
+create table stocks (stockName STRING, date DATE, adjCP FLOAT);
+
+insert overwrite table stocks 
+SELECT 
+INPUT__FILE__NAME stockName, 
+regexp_extract(col_value, '^(?:([^,]*)\,?){1}', 1) date, 
+regexp_extract(col_value, '^(?:([^,]*)\,?){7}') adjCP
+from stockData;
+
+DROP TABLE IF EXISTS stocksDateSplit;
+CREATE TABLE stocksDateSplit (keys STRING, values STRING);
+
+insert overwrite table stocksDateSplit
+SELECT 
+CONCAT(SUBSTR(date,1,7),'##',stockName) keys,
+CONCAT(SUBSTR(date,9,10),'##',adjCP) values 
+from stocks;
+
+DROP TABLE IF EXISTS MinMax;
+CREATE TABLE MinMax (stockName STRING, xi STRING);
+
+insert overwrite table MinMax
+SELECT 
+SUBSTR(keys,10,LENGTH(keys)) stockName,
+(SUBSTR(max(values),5,LENGTH(max(values)))-SUBSTR(min(values),5,LENGTH(min(values))))/SUBSTR(min(values),5,LENGTH(min(values))) as xi
+from stocksDateSplit GROUP BY keys;
+
+DROP TABLE IF EXISTS stockAndXBar;
+CREATE TABLE stockAndXBar (xBar STRING, stock STRING);
+
+insert overwrite table stockAndXBar
+SELECT
+AVG(xi) as xBar,
+stockName as stock
+from MinMax GROUP BY stockName;
+
+DROP TABLE IF EXISTS stockXiXBar;
+CREATE TABLE stockXiXBar (stockName STRING, xi STRING, xBar STRING);
+
+insert overwrite table stockXiXBar
+SELECT
+stockAndXBar.stock as stockName,
+MinMax.xi as xi,
+stockAndXBar.xBar as xBar
+FROM MinMax INNER JOIN stockAndXBar ON MinMax.stockName=stockAndXBar.stock;
+
+DROP TABLE IF EXISTS stockVol;
+CREATE TABLE stockVol (stock STRING, volatility FLOAT);
+
+insert overwrite table stockVol
+SELECT
+stockName as stock,
+SQRT(SUM((xi-xBar)*(xi-xBar))/(COUNT(stockName)-1)) as volatility
+FROM stockXiXBar GROUP BY stockName;
+
+select * 
+from stockVol 
+WHERE volatility!=0 AND volatility is not NULL 
+ORDER BY volatility LIMIT 10;
+
+select * 
+from stockVol 
+WHERE volatility!=0 AND volatility is not NULL 
+ORDER BY volatility DESC LIMIT 10;
+
+
+
+

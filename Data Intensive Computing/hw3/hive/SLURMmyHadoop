@@ -1,0 +1,152 @@
+#!/bin/bash
+##SBATCH --partition=debug
+#SBATCH --time=00:59:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --exclusive
+#SBATCH --job-name="Hive_vol_Small"
+#SBATCH --output=test-%J.out
+#SBATCH --mail-user=nnarayan@buffalo.edu
+#Specifies that the job will be requeued after a node failure.
+#The default is that the job will not be requeued.
+#
+#This SLURM script is modified version of the SDSC script
+# found in /util/academic/myhadoop/myHadoop-0.30b/examples.
+# CDC January 29, 2015
+#
+echo "SLURM_JOBID="$SLURM_JOBID
+echo "SLURM_JOB_NODELIST"=$SLURM_JOB_NODELIST
+echo "SLURM_NNODES"=$SLURM_NNODES
+echo "SLURMTMPDIR="$SLURMTMPDIR
+
+echo "working directory = "$SLURM_SUBMIT_DIR
+
+module load java/1.6.0_22
+module load hadoop/2.5.1
+module load hive/0.14.0
+module load myhadoop/0.30b
+module list
+echo "MH_HOME="$MH_HOME
+echo "HADOOP_HOME="$HADOOP_HOME
+echo "Setting HADOOP to use SLURMTMPDIR on the local disk"
+export MH_SCRATCH_DIR=$SLURMTMPDIR
+echo "MH_SCRATCH_DIR="$MH_SCRATCH_DIR
+#### Set this to the directory where Hadoop configs should be generated
+# Don't change the name of this variable (HADOOP_CONF_DIR) as it is
+# required by Hadoop - all config files will be picked up from here
+#
+# Make sure that this is accessible to all nodes
+export HADOOP_CONF_DIR=$SLURM_SUBMIT_DIR/config-$SLURM_JOBID
+export HIVE_CONF_DIR=$SLURM_SUBMIT_DIR/config-$SLURM_JOBID
+echo "create diretory for HIVE metadata"
+### Set up the configuration
+# Make sure number of nodes is the same as what you have requested from PBS
+# usage: $myhadoop-configure.sh -h
+# this is the non-persistent mode
+NPROCS=`srun --nodes=${SLURM_NNODES} bash -c 'hostname' |wc -l`
+echo "-------Set up the configurations for myHadoop"
+$MH_HOME/bin/myhadoop-configure.sh 
+#
+cp $HIVE_HOME/conf/hive-env.sh-sample $HIVE_CONF_DIR/hive-env.sh
+cp $HIVE_HOME/conf/hive-default.xml-sample $HIVE_CONF_DIR/hive-default.xml
+sed -i 's:MY_HIVE_SCRATCH:'"$SLURMTMPDIR"':g' $HIVE_CONF_DIR/hive-default.xml
+cp $HIVE_HOME/conf/hive-log4j.properties-sample $HIVE_CONF_DIR/hive-log4j.properties
+sed -i 's:MY_HIVE_DIR:'"$SLURM_SUBMIT_DIR"':' $HIVE_CONF_DIR/hive-log4j.properties
+ls -l $HADOOP_CONF_DIR
+echo "-------Start hdfs and yarn ---"
+$HADOOP_HOME/sbin/start-all.sh
+#### Format HDFS, if this is the first time or not a persistent instance
+echo "-------Show Report ---"
+#$HADOOP_HOME/bin/hadoop dfsadmin -report
+echo "-------make directory ---"
+# DON'T CHANGE THSES COMMAND, AS YOU WILL NEED THESE DIRECTORY FOR CREATING TABLE
+$HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR dfs -mkdir /tmp
+$HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR dfs -mkdir -p /user/hive/warehouse
+$HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR dfs -chmod g+w /tmp
+$HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR dfs -chmod g+w /user/hive/warehouse
+#echo "-------list warehouse directory ---"
+$HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR dfs -ls /user/hive/warehouse
+
+##Code to calculate Volatility
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stockData;"
+$HIVE_HOME/bin/hive -e "create table stockData (col_value STRING);"
+
+$HIVE_HOME/bin/hive -e "LOAD DATA LOCAL INPATH '$1/*.csv' OVERWRITE INTO TABLE stockData;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stocks;"
+
+$HIVE_HOME/bin/hive -e "create table stocks (stockName STRING, date DATE, adjCP FLOAT);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table stocks 
+SELECT
+INPUT__FILE__NAME stockName, 
+regexp_extract(col_value, '^(?:([^,]*)\,?){1}', 1) date, 
+regexp_extract(col_value, '^(?:([^,]*)\,?){7}') adjCP
+from stockData;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stocksDateSplit;
+CREATE TABLE stocksDateSplit (keys STRING, values STRING);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table stocksDateSplit
+SELECT 
+CONCAT(SUBSTR(date,1,7),'##',stockName) keys,
+CONCAT(SUBSTR(date,9,10),'##',adjCP) values 
+from stocks;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS MinMax;"
+
+$HIVE_HOME/bin/hive -e "CREATE TABLE MinMax (stockName STRING, xi STRING);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table MinMax
+SELECT 
+SUBSTR(keys,10,LENGTH(keys)) stockName,
+(SUBSTR(max(values),5,LENGTH(max(values)))-SUBSTR(min(values),5,LENGTH(min(values))))/SUBSTR(min(values),5,LENGTH(min(values))) as xi
+from stocksDateSplit GROUP BY keys;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stockAndXBar;"
+
+$HIVE_HOME/bin/hive -e "CREATE TABLE stockAndXBar (xBar STRING, stock STRING);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table stockAndXBar
+SELECT
+AVG(xi) as xBar,
+stockName as stock
+from MinMax GROUP BY stockName;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stockXiXBar;"
+
+$HIVE_HOME/bin/hive -e "CREATE TABLE stockXiXBar (stockName STRING, xi STRING, xBar STRING);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table stockXiXBar
+SELECT
+stockAndXBar.stock as stockName,
+MinMax.xi as xi,
+stockAndXBar.xBar as xBar
+FROM MinMax INNER JOIN stockAndXBar ON MinMax.stockName=stockAndXBar.stock;"
+
+$HIVE_HOME/bin/hive -e "DROP TABLE IF EXISTS stockVol;"
+
+$HIVE_HOME/bin/hive -e "CREATE TABLE stockVol (stock STRING, volatility FLOAT);"
+
+$HIVE_HOME/bin/hive -e "insert overwrite table stockVol
+SELECT
+stockName as stock,
+SQRT(SUM((xi-xBar)*(xi-xBar))/(COUNT(stockName)-1)) as volatility
+FROM stockXiXBar GROUP BY stockName;"
+
+$HIVE_HOME/bin/hive -e "select * 
+from stockVol 
+WHERE volatility!=0 AND volatility is not NULL 
+ORDER BY volatility ASC LIMIT 10;"
+
+$HIVE_HOME/bin/hive -e "select * 
+from stockVol 
+WHERE volatility!=0 AND volatility is not NULL 
+ORDER BY volatility DESC LIMIT 10;"
+
+
+echo "-------Stop hdfs and yarn ---"
+$HADOOP_HOME/sbin/stop-all.sh
+
+#### Clean up the working directories after job completion
+$MH_HOME/bin/myhadoop-cleanup.sh
