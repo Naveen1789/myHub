@@ -1,0 +1,51 @@
+1. Turn on the enable switch ( LEDs and 7-segment displays won't work otherwise ).
+
+2. Toggle switches to represent the binary number ( corresponding LEDs will be turned on when the switch is at HIGH ).
+
+3. Push a button to display the binary number ( in hexa decimal ) on the corresponding 7-segment display.
+
+4. Toggle the switches to represent a different binary number. To update the 7-segment display, push the button again.
+
+#####################################################################################################################
+
+CLK ->
+clk = B8
+
+Enable switch ->
+enable = E2
+
+LED to indicate if 'enable' switch is turned on ->
+enableLed = P4
+
+Switches representing the binary number ->
+switch[3] = B4 ( MSB )
+switch[2] = K3
+switch[1] = L3
+switch[0] = P11 ( LSB )
+
+Corresponding LEDs ->
+led[3] = P6 ( MSB )
+led[2] = P7
+led[1] = M11
+led[0] = M5 ( LSB )
+
+Push buttons ->
+btn[3] = A7
+btn[2] = M4
+btn[1] = C11
+btn[0] = G12
+
+Cathodes ->
+cathodes[6] = L14
+cathodes[5] = H12
+cathodes[4] = N14
+cathodes[3] = N11
+cathodes[2] = P12
+cathodes[1] = L13
+cathodes[0] = M12
+
+Anodes ->
+anodes[3] = F12
+anodes[2] = J12
+anodes[1] = M13
+anodes[0] = K14

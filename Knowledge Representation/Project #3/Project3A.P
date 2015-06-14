@@ -1,0 +1,110 @@
+% <Naveen Narayan>
+% <50134647>
+% The submitted solutions are my individual work.
+:- auto_table.
+
+%================================================
+edge(g1, a, b).
+edge(g1, e, b).
+edge(g1, b, c).
+edge(g1, c, d).
+edge(g1, d, b).
+edge(g1, c, f).
+edge(g1, d, f).
+
+edge(g2, a, c).
+edge(g2, a, h).
+edge(g2, a, d).
+edge(g2, b, d).
+edge(g2, b, g).
+edge(g2, b, c).
+edge(g2, c, e).
+edge(g2, d, f).
+edge(g2, e, g).
+edge(g2, f, h).
+
+edge(g3, a, b).
+edge(g3, b, c).
+edge(g3, c, a).
+edge(g3, d, e).
+
+edge(g4, a, c).
+edge(g4, a, d).
+edge(g4, a, h).
+edge(g4, b, d).
+edge(g4, c, d).
+edge(g4, d, e).
+edge(g4, d, f).
+edge(g4, d, g).
+edge(g4, f, h).
+
+edge(g5, a, a).
+edge(g5, b, b).
+edge(g5, c, c).
+edge(g5, b, c).
+%================================================
+
+edge(italy, rome, milan).
+edge(italy, milan, venice).
+edge(italy, venice, rome).
+edge(italy, palermo, syracuse).
+
+edge(ny, nyc, albany).
+edge(ny, nyc, rochester).
+edge(ny, nyc, buffalo).
+edge(ny, albany, rochester).
+edge(ny, rochester,buffalo).
+
+%======================temp======================
+edge(t,v1,v2).
+edge(t,v2,v3).
+edge(t,v1,v3).
+edge(t,v4,v5).
+%======================temp======================
+
+%================================================
+
+% Question #1
+node(G,X) :- edge(G,X,_).
+node(G,X) :- edge(G,_,X).
+
+%================================================
+
+% Question #2
+tc(G,A,B) :- edge(G,A,B).
+tc(G,A,B) :- edge(G,A,C) , tc(G,C,B).
+
+%================================================
+
+% Question #3
+acyclic(G) :- not tc(G,A,A).
+
+%================================================
+
+% Question #4
+%undir path from a to b exists if there is an edge from a to b or if there is an edge from b to a
+%undir path from a to b exists if there is an edge from a to c or if there is an edge from c to a and there exists an undirected path from c to b
+
+undirPathExists(G,A,A) :- node(G,A).
+undirPathExists(G,A,B) :- edge(G,A,B).
+undirPathExists(G,A,B) :- edge(G,B,A).
+undirPathExists(G,A,B) :- edge(G,A,C), undirPathExists(G,C,B).
+undirPathExists(G,A,B) :- edge(G,C,A), undirPathExists(G,C,B).
+
+% disconnected(G) has atleast 1 pair of vertices such that there is no undirected path between these vertices
+% if a and b are 2 vertices, and there is no undirected path between a and b, G is disconnected
+
+disconnected(G) :- node(G,A), node(G,B), not undirPathExists(G,A,B).
+
+%A graph G is connected if it cant be proven that G is disconnected
+connected(G) :- not disconnected(G).
+
+%================================================
+
+% Question #5
+inDirectLink(G,A,B) :- edge(G,A,C), tc(G,C,B).
+tr(G,A,B) :- not inDirectLink(G,A,B).
+
+%================================================
+
+% consult('C:\\Users\\Prathibha\\Desktop\\First Semester\\KR\\Homeworks and assignments\\Proj 3\\Project3A.P').

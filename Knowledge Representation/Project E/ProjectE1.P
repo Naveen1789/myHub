@@ -1,0 +1,32 @@
+% Naveen Narayan
+% 50134647
+% The submitted solutions are my individual work.
+
+shorter([],[]).
+shorter([],L1).
+shorter([H1|T1],[H2|T2]) :- shorter(T1,T2).
+
+sorted([]).
+sorted([H|[]]).
+sorted([H|[H1|T1]]) :- shorter(H,H1),sorted([H1|T1]).
+
+split([],[],[]).
+split([X],[],[X]).
+split([X],[Y],[X|Y]).
+split([H1|T1],[H2|T2],[H1|[H2|T]]) :- split(T1,T2,T).
+
+mergesort([],[],[]).
+mergesort(L1,[],L1).
+mergesort(L1,L1,[]).
+
+mergesort([H1|T],[H1|T1],[H2|T2]) :- shorter(H1,H2), mergesort(T,T1,[H2|T2]).
+mergesort([H2|T],[H1|T1],[H2|T2]) :- shorter(H2,H1), mergesort(T,[H1|T1],T2).
+
+%====================================================================================
+
+sorted(L,L).
+sorted1(L,L).
+sorted(Ls, [Hu|[Hu1|Tu1]]) :-  mergesort(L,[Hu],[Hu1]) , sorted1([Ls],[L|Tu1]).
+sorted1(Ls, [Hu|[Hu1|Tu1]]) :-  mergesort(L,Hu,[Hu1]) , sorted1(Ls,[L|Tu1]).
+
+%====================================================================================

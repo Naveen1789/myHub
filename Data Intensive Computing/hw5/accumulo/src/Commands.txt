@@ -1,0 +1,45 @@
+TO START ACCUMULO, HADOOP AND ZOOKEEPER :
+
+	chmod 775/home/guest/Desktop/update-script.sh
+	/home/guest/Desktop/update-script.sh' 
+
+LOAD DATA INTO HADDOP :
+
+	hadoop fs -mkdir /input
+	hadoop fs -copyFromLocal /home/guest/Downloads/Python_script_and_CSV_files/*.csv /input
+
+CREATING TABLES AND USERS :
+
+	accumulo shell -u root -p acc
+	setauths -s east,west -u root
+	createuser east
+		( enter password for this user )
+	createuser west
+		( enter password for this user )
+	setauths -s east -u east
+	setauths -s west -u west
+
+	createtable temp
+	grant Table.READ -t temp -u west
+	grant Table.READ -t temp -u east
+	grant Table.READ -t temp -u west
+
+	createtable Win
+	setiter -class org.apache.accumulo.core.iterators.user.SummingCombiner -p 10 -t Win -majc -minc –scan
+	grant Table.READ -t Win -u east
+	grant Table.READ -t Win -u west
+
+	createtable Lose
+	setiter -class org.apache.accumulo.core.iterators.user.SummingCombiner -p 10 -t Lose -majc -minc –scan
+	grant Table.READ -t Lose -u east
+	grant Table.READ -t Lose -u west
+
+	EXECUTE JAR :
+
+	bin/tool.sh /home/guest/Downloads/nbaPopularity.jar org.apache.accumulo.examples.simple.mapreduce.WordCount acc guestvb /input temp -u root -p acc
+
+
+
+
+
+

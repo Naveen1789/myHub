@@ -1,0 +1,76 @@
+% Naveen Narayan
+% 50134647
+% The submitted solutions are my individual work.
+
+%===========================Example 1============================
+%respects(a,d).
+%respects(b,d).
+%respects(c,d).
+
+%respects(a,d1).
+%respects(b,d1).
+%respects(c,d1).
+
+%respects(d1,d).
+%respects(d,d1).
+%===========================Example 1============================
+
+%===========================Basin city===========================
+respects(marsellus_wallace, mark_gor_lee).
+respects(mark_gor_lee, carlito_brigante).
+respects(walter_kurtz, carlito_brigante).
+respects(anton_chigurh, mark_gor_lee).
+respects(charles_bronson, carlito_brigante).
+respects(carlito_brigante, tony_montana).
+respects(marsellus_wallace, tony_montana).
+respects(tony_montana, vito_corleone).
+respects(vito_corleone, carlito_brigante).
+respects(anton_chigurh, vito_corleone).
+respects(marsellus_wallace, carlito_brigante).
+respects(tony_montana, carlito_brigante).
+respects(anton_chigurh, carlito_brigante).
+respects(marsellus_wallace, charles_bronson).
+respects(charles_bronson, mark_gor_lee).
+respects(charles_bronson, marsellus_wallace).
+respects(walter_kurtz, vito_corleone).
+respects(charles_bronson, tony_montana).
+respects(marsellus_wallace, vito_corleone).
+respects(charles_bronson, walter_kurtz).
+respects(vito_corleone, tony_montana).
+respects(mark_gor_lee, charles_bronson).
+respects(carlito_brigante, vito_corleone).
+respects(charles_bronson, vito_corleone).
+respects(mark_gor_lee, marsellus_wallace).
+respects(anton_chigurh, tony_montana).
+respects(walter_kurtz, charles_bronson).
+respects(walter_kurtz, tony_montana).
+respects(charles_bronson, anton_chigurh).
+respects(anton_chigurh, charles_bronson).
+respects(walter_kurtz, marsellus_wallace).
+respects(mark_gor_lee, vito_corleone).
+respects(mark_gor_lee, tony_montana).
+respects(anton_chigurh, marsellus_wallace).
+respects(walter_kurtz, mark_gor_lee).
+%===========================Basin city===========================
+
+% World ( City ) of criminals
+criminal(X) :- respects(X,Y).
+criminal(Y) :- respects(X,Y).
+
+% A criminal is either a felon or a gangster
+felon(X) v gangster(X) :- criminal(X).
+
+% A criminal cannot be both a felon and a gangster
+:- felon(X), gangster(X).
+
+% A gangster is a criminal who is respected by all criminals
+respects(X,X) :- gangster(X).	% work-around : for avoiding using a != b
+:- gangster(X), criminal(Y), not respects(Y,X).
+
+% A gangster respects no felons
+:- felon(X), gangster(Y), respects(Y,X).
+
+gangsterExists :- criminal(X), gangster(X).
+
+% There needs to be atleast 1 gangster
+:- not gangsterExists.

@@ -1,0 +1,81 @@
+***********************************************************************
+
+root@acc> table Win
+root@acc Win> scan
+Atlanta Hawks #Hawks:wins [east]    1
+Chicago Bulls #Bulls:wins [east]    7
+Cleveland Cavaliers #Cavs:wins [east]    3
+Dallas Mavericks #Mavs:wins [west]    1
+Golden State Warriors #GSWarriors:wins [west]    23
+Houston Rockets #Rockets:wins [west]    2
+L.A. Clippers #Clippers:wins [west]    2
+Memphis Grizzlies #Grizzlies:wins [west]    4
+New York Knicks #Knicks:wins [east]    19
+Phoenix Suns #Suns:wins [west]    2
+Sacramento Kings #NBAKings:wins [west]    1
+San Antonio Spurs #GoSpursGo:wins [west]    1
+Utah Jazz #UtahJazz:wins [west]    1
+Washington Wizards #Wizards:wins [east]    3
+
+***********************************************************************
+
+west@acc Win> user east
+Enter password for user east: ****
+east@acc Win> scan
+Atlanta Hawks #Hawks:wins [east]    1
+Chicago Bulls #Bulls:wins [east]    7
+Cleveland Cavaliers #Cavs:wins [east]    3
+New York Knicks #Knicks:wins [east]    19
+Washington Wizards #Wizards:wins [east]    3
+
+***********************************************************************
+
+east@acc Win> user west
+Enter password for user west: ****
+west@acc Win> scan
+Dallas Mavericks #Mavs:wins [west]    1
+Golden State Warriors #GSWarriors:wins [west]    23
+Houston Rockets #Rockets:wins [west]    2
+L.A. Clippers #Clippers:wins [west]    2
+Memphis Grizzlies #Grizzlies:wins [west]    4
+Phoenix Suns #Suns:wins [west]    2
+Sacramento Kings #NBAKings:wins [west]    1
+San Antonio Spurs #GoSpursGo:wins [west]    1
+Utah Jazz #UtahJazz:wins [west]    1
+
+***********************************************************************
+
+root@acc Win> table Lose
+root@acc Lose> scan      
+Atlanta Hawks #Hawks:losses [east]    2
+Boston Celtics #Celtics:losses [east]    2
+Chicago Bulls #Bulls:losses [east]    1
+Denver Nuggets #Nuggets:losses [west]    1
+Houston Rockets #Rockets:losses [west]    1
+LA Lakers #Lakers:losses [west]    1
+New York Knicks #Knicks:losses [east]    3
+Portland Trailblazers #TrailBlazers:losses [west]    3
+Toronto Raptors #Raptors:losses [east]    1
+
+***********************************************************************
+
+root@acc Lose> user east
+Enter password for user east: ****
+east@acc Lose> scan
+Atlanta Hawks #Hawks:losses [east]    2
+Boston Celtics #Celtics:losses [east]    2
+Chicago Bulls #Bulls:losses [east]    1
+New York Knicks #Knicks:losses [east]    3
+Toronto Raptors #Raptors:losses [east]    1
+
+***********************************************************************
+
+east@acc Lose> user west
+Enter password for user west: ****
+west@acc Lose> scan
+Denver Nuggets #Nuggets:losses [west]    1
+Houston Rockets #Rockets:losses [west]    1
+LA Lakers #Lakers:losses [west]    1
+Portland Trailblazers #TrailBlazers:losses [west]    3
+
+***********************************************************************
