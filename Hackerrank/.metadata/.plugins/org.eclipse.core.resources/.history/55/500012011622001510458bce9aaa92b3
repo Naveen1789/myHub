@@ -1,0 +1,22 @@
+package bigNumber.javaBigDecimal;
+
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ArrayList<BigDeimal> bigDecArrList = new ArrayList<BigDeimal>();
+		
+		
+		Scanner in = new Scanner(System.in);
+		
+		int n = in.nextInt();
+
+		for(int i = 1 ; i <= n ; i++ ){
+			
+		}
+	}
+
+}

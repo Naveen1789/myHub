@@ -1,0 +1,70 @@
+package strings.javaStrings;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Solution {
+	
+	public static void tempSol(){
+		 ArrayList<String> mylist = new ArrayList<String>();
+		 System.out.println("Enter the string of atmost 1000        characters");
+		 Scanner in = new Scanner(System.in);
+		 String s=in.nextLine();
+		 System.out.println("Enter the value of integer a");
+		 int count=in.nextInt();
+		 String tokenData="";
+		 char c[]=s.toCharArray();
+		 int i=0;
+		 for(int j=i;j<c.length ;j++){
+		     tokenData=tokenData+String.valueOf(c[j]);
+		     if(tokenData.length()==count){
+		         mylist.add(tokenData);
+		         //strarray[i]=tokenData;
+		         tokenData="";
+		         j=i;
+		         i++;
+
+		         if(i==c.length-(count-1)){
+		             break;
+		         }
+		     }
+		 }
+	}
+
+	public static void main(String[] args) {
+		
+		tempSol();
+//		// TODO Auto-generated method stub
+//				
+//		Scanner in = new Scanner(System.in);
+//		
+//		String msg = in.nextLine();
+//		// msg.trim();
+//		// msg.replaceAll("\\s", "");
+//		
+//		int subStrLen = in.nextInt();
+//		
+//		String lexicographicallySmallest = "{{{";
+//		String lexicographicallyLargest = "@@@";
+//		
+//		if(subStrLen == 0){
+//			lexicographicallySmallest = "";
+//			lexicographicallyLargest = "";
+//		
+//		}
+//		else if(subStrLen >= msg.length()){
+//			lexicographicallySmallest = msg;
+//			lexicographicallyLargest = msg;
+//		}
+//		else{
+//			for(int i = 0 ; i <= ( msg.length() - subStrLen ) ; i++){
+//				lexicographicallySmallest = ( (msg.substring(i, (i+3))).compareTo(lexicographicallySmallest) < 0 ) ? msg.substring(i, (i+3)) : lexicographicallySmallest;
+//				lexicographicallyLargest = ( (msg.substring(i, (i+3))).compareTo(lexicographicallyLargest) > 0 ) ? msg.substring(i, (i+3)) : lexicographicallyLargest;
+//			}
+//		}
+//		
+//		System.out.println(lexicographicallySmallest + "\n" + lexicographicallyLargest);
+
+	}
+
+}

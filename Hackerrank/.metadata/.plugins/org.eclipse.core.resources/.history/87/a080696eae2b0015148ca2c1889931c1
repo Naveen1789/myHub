@@ -1,0 +1,32 @@
+package bigNumber.javaBigDecimal;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ArrayList<BigDecimal> bigDecArrList = new ArrayList<BigDecimal>();
+		ArrayList<BigDecimal> tempBigDecArrList = new ArrayList<BigDecimal>();
+		
+		// bigDecArrList.sort();
+		Scanner in = new Scanner(System.in);
+		
+		int n = in.nextInt();
+
+		for(int i = 0 ; i < n ; i++ ){
+			bigDecArrList.add(new BigDecimal(in.next()));
+		}
+		
+		Collections.sort(bigDecArrList);
+		
+		for(BigDecimal bd : bigDecArrList){
+			tempBigDecArrList.add(bd);
+		}
+	}
+
+}

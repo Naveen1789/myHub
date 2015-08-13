@@ -1,0 +1,22 @@
+package bigNumber.javaBigInteger;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner in = new Scanner(System.in);
+		
+		String a = in.next();
+		BigInteger bigA = new BigInteger(a);
+		String b = in.next();
+		BigInteger bigB = new BigInteger(b);
+		
+		System.out.println((bigA.add(bigB)) + "\n" + (bigA.multiply(bigB)));
+
+	}
+
+}

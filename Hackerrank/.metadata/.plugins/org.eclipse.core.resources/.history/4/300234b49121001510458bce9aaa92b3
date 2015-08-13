@@ -1,0 +1,11 @@
+package strings.javaStringToken;
+
+public class Solution {
+
+	int a;
+	
+	public static void main(String args[]){
+		Solution s = new Solution();
+		System.out.println(s.a);
+	}
+}

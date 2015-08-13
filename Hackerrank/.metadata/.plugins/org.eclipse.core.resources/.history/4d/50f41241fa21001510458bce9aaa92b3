@@ -1,0 +1,26 @@
+package strings.javaStringToken;
+
+public class Solution {
+	byte b;
+	short s;
+	int i;
+	long l;	
+	float f;
+	double d;	
+	char c;
+	boolean bo;
+	String st;
+	
+	public static void main(String args[]){
+		Solution s = new Solution();
+		System.out.println(s.b);
+		System.out.println(s.s);
+		System.out.println(s.i);
+		System.out.println(s.l);
+		System.out.println(s.f);
+		System.out.println(s.d);
+		System.out.println(s.c);
+		System.out.println(s.bo);
+		System.out.println(s.st);
+	}
+}

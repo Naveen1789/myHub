@@ -1,37 +1,28 @@
 package otherSimpleAlgorithms;
 
-public class LinkedLists {
+import java.util.HashSet;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+public class LinkedLists {
+	
+	public static void main(String args[]){
 		
-		Node n1 = new Node(10);
-		Node n2 = new Node(20);
-		Node n3 = new Node(30);
-		Node n4 = new Node(40);
-		Node n5 = new Node(50);
+
 		
 		LinkedList l1 = new LinkedList();
-		l1.setHead(n1);
-		
+		l1.addNode("a");
+		l1.addNode("b");
+		l1.addNode("b");
+		l1.addNode("c");
+		l1.addNode("d");
+
 		l1.display();
-		System.out.println("Number of nodes : " + l1.getSize());
-		
-		l1.addNode(n2);
-		l1.addNode(n3);
-		l1.addNode(n4);
-		l1.addNode(n5);
-		
-		l1.display();
-		System.out.println("Number of nodes : " + l1.getSize());
-		
-//		l1.addNode(n3);
-//		
-//		l1.display();
-//		System.out.println("Number of nodes : " + l1.getSize());
+		System.out.println(l1.getNode(0));
+		System.out.println(l1.getNode(1));
+		System.out.println(l1.getNode(2));
+		System.out.println(l1.getNode(3));
+		System.out.println(l1.getNode(4));
+		System.out.println(l1.getNode(5));
 
 	}
 
@@ -42,12 +33,10 @@ public class LinkedLists {
 class LinkedList {
 	
 	Node head ;
-	Node lastNode ;
 	int size ;
 	
 	LinkedList () {
 		this.head = null ;
-		this.lastNode = null ;
 		this.size = 0 ;
 	}
 
@@ -55,108 +44,349 @@ class LinkedList {
 		return head;
 	}
 
-	public void setHead(Node head) {
-		this.head = head;
-		this.lastNode = head ;
-		this.size = 1 ;
-	}
-
-	public Node getLastNode() {
-		return lastNode;
-	}
-
-//	public void setLastNode(Node lastNode) {
-//		this.lastNode = lastNode;
+//	public void setHead(Node head) {
+//
 //	}
+
 	
 	public int getSize() {
 		return size;
 	}
 
 //	public void setSize(int size) {
-//		this.size = size;
+// 
 //	}
 
-	public void addNode ( Node n ) {
+	public void addNode ( String str ) {
 		
-		if ( lastNode.getNextNode() == null ) {
+		Node n = new Node(str);
+		// If the LL is empty, this will be the first node
+		if(this.size == 0){
+			this.head = n ;
+			this.size = 1;
+		}
+		// Add this node to the end of the LL
+		else{
+			int curPtr = 0;
+			Node curNode = head;
+			while(curPtr<(this.size-1)){
+				curNode = curNode.nextNode;
+				curPtr++;
+			}
+			curNode.nextNode = n;
+			this.size++;
+		}
+
+	}
+	
+	public void addNode (int index, String str) {
 		
-			// Adding a stand alone Node.
-		if ( n.getNextNode() == null ) {	
-		lastNode.setNextNode(n) ;
-		size++ ;
+		/*
+		 * 
+		 * index cannot be larger than size of the array list
+		LinkedList<Integer> l = new LinkedList<Integer>();
 		
-		lastNode = n ;
+		l.add(17);
+		l.add(22);
+		
+		l.add(1,49);
+		// l.add(5,49);
+		
+		Iterator it = l.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+		 */
+		
+		if(index >= this.size){
+			System.out.println("Index is out of range.");
+			return;
 		}
 		
-		else {
-			
-			// Under Construction
-			
-//			int count = 0 ;
-//			
-//			while ( )
-			
+		Node curNode = this.head;
+		
+		int curPtr = 0;
+		
+		while(curPtr < (index-1)){
+			curNode = curNode.nextNode;
+			curPtr++;
 		}
 		
+		Node tempNode = curNode.nextNode;
+		
+		Node n = new Node(str);
+		curNode.nextNode = n;
+		
+		n.nextNode = tempNode;
+		this.size++;
+
+	}
+	
+	public void addFirst ( String str ) {
+		
+		Node n = new Node(str);
+		n.nextNode = this.head;
+		
+		this.head = n;
+		this.size++;
+
+	}
+	
+	public void addLast ( String str ) {
+		
+		this.addNode(str);
+
+	}
+	
+	public void deleteFirst(){
+		if(this.size <= 0){
+			System.out.println("Linked List is empty.");
+			return;
+		}
+		this.head = head.nextNode;
+		this.size--;
+	}
+	
+	public void deleteLast(){
+		
+		if(this.size <= 0){
+			System.out.println("Linked List is empty.");
+			return;
 		}
 		
-		else {
-			System.out.println("[ This linked list has a loop. ]");
-			System.out.println("Sorry.\nYou cannot add any more nodes.");
+		int curPtr = 0;
+		Node curNode = head;
+		while(curPtr<(this.size-2)){
+			curNode = curNode.nextNode;
+			curPtr++;
 		}
+		curNode.nextNode = null;
+		this.size--;
+		
+	}
+	
+	public void deleteNode(int index){
+		
+		if(index < 0 || index >= this.size){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		if(index == 0){
+			this.deleteFirst();
+			return;
+		}
+		int curPtr = 0;
+		Node curNode = head;
+		while(curPtr<(index-1)){
+			curNode = curNode.nextNode;
+			curPtr++;
+		}
+		
+//		Node temp = curNode.nextNode;
+		curNode.nextNode = (curNode.nextNode).nextNode;
+//		temp.nextNode = null;
+		this.size = this.size - 1;
+		
+	}
+	
+	public void deleteNode(String str){
+		
+		int curPtr = 0;
+		Node curNode = head;
+		
+		while(curPtr <= (this.size - 1)){
+			if(curNode.getInfo().equals(str)){
+				this.deleteNode(curPtr);
+				return;
+			}
+			curNode = curNode.nextNode;
+			curPtr++;
+		}
+	}
+	
+	public void deleteAllNodes(String str){
+		
+		int curPtr = 0;
+		Node curNode = head;
+		
+		while(curPtr <= (this.size - 1)){
+			System.out.println("curPtr = " + curPtr);
+			System.out.println("curNode.getInfo() = " + curNode.getInfo());
+			System.out.println("this.size = " + this.size);
+			if(curNode.getInfo().equals(str)){
+				System.out.println("Match found");
+				this.deleteNode(curPtr);
+			}
+			else{
+				curPtr++;
+			}
+			curNode = curNode.nextNode;
+		}
+	}
+	
+	public String getNode(int index){
+		
+		
+		if(index >= this.size){
+			System.out.println("Index out of range.");
+			return null;
+		}
+		Node curNode = this.head;
+		int curPtr = 0;
+		while(curPtr < index){
+			curPtr++;
+			curNode = curNode.nextNode;
+		}
+		return curNode.getInfo();
+		
 	}
 	
 	public void display () {
 		
-		displayFunc ( head ) ;
+		Node curNode = this.head;
+		
+		int i = 1;
+		while(i <= this.size ){
+			System.out.print(curNode.getInfo() + "\t");
+			i++;
+			curNode = curNode.nextNode;
+		}
+		System.out.println();
+	}
+	
+	public void display (int start, int last) {
+			
+		if(start < 0 || last < 0 || start > (this.size - 1) || last > (this.size - 1)){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		Node curNode = this.head;
+		
+		int i = 0;
+		while(i < start ){
+			curNode = curNode.nextNode;
+			i++;
+		}
+			
+		while(i <= last ){
+			System.out.print(curNode.getInfo() + "\t");
+			i++;
+			curNode = curNode.nextNode;
+		}
+		System.out.println();
+	}
+	
+	public void display (int start) {
+		
+		if(start < 0 || start > (this.size - 1)){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		Node curNode = this.head;
+		
+		int i = 0;
+		while(i < start ){
+			curNode = curNode.nextNode;
+			i++;
+		}
+			
+		while(i < this.size ){
+			System.out.println(curNode.getInfo() + "\t");
+			i++;
+			curNode = curNode.nextNode;
+		}
+		System.out.println();
+	}
+	
+	public void removeDuplicatesUsingHashSet(){
+		if(this.size <= 0){
+			System.out.println("LinkedList isempty.");
+			return;
+		}
+		
+		HashSet<String> hSet = new HashSet<String>();
+		
+		Node curNode = this.head;		
+		int curPtr = 0;
+		while(curPtr < this.size){
+//			System.out.println("curPtr = " + curPtr);
+//			System.out.println("curNode.info = " + curNode.info);
+//			System.out.println("this.size = " + this.size);
+			if(hSet.contains(curNode.info)){
+				this.deleteNode(curPtr);
+				
+			}
+			else{
+				hSet.add(curNode.info);
+				curPtr++;
+			}
+			curNode = curNode.nextNode;
+			
+			
+		}
 		
 	}
 	
-	private void displayFunc ( Node n ) {
+	public void removeDuplicates(){
+		if(this.size <= 0){
+			System.out.println("LinkedList isempty.");
+			return;
+		}
 		
-		if ( n.getNextNode() != null ) {
-			System.out.print(n.getInfo() + "\t");
-			displayFunc(n.getNextNode());
+		Node curNode = this.head;		
+		
+		
+		for(int curPtr = 0; curPtr < this.size; ++curPtr){
+			Node n = curNode.nextNode;
+			for(int nextPtr = curPtr + 1; nextPtr < this.size; ){
+//				System.out.println("curNode.info : " + curNode.info);
+//				System.out.println("n.info : " + n.info);
+				if(curNode.info.equals(n.info)){
+					this.deleteNode(nextPtr);
+				}
+				else{
+					nextPtr++;
+				}
+				n = n.nextNode;
+			}
+			curNode = curNode.nextNode;
 		}
-		else {
-			System.out.println(n.getInfo());
-			return ;
-		}
-//		do {
-//		System.out.println(n.getInfo());
-//		displayFunc(n.getNextNode());
-//		}while ( n.getNextNode() != null );
 		
 	}
-		
+
 }
-// ==================================================================================== //
+
+//==================================================================================== //
 
 class Node {
 	
-	int info ;
+	String info ;
 	Node nextNode ;
+	// int index;
+	// Index in the LL
 	
-	Node ( int info , Node next ) {
-		this.info = info ;
-		this.nextNode = next ;
-	}
+//	Node ( String info , Node next ) {
+//		this.info = info ;
+//		this.nextNode = next ;
+//	}
 	
-	Node ( int info ) {
+	Node ( String info ) {
 		this.info = info ;
 		this.nextNode = null ;
 	}
 	
-	Node () {
-		this.info = 0 ;
-		this.nextNode = null ;
-	}
+//	Node () {
+//		this.info = "" ;
+//		this.nextNode = null ;
+//	}
 	
-	public int getInfo() {
+	public String getInfo() {
 		return info;
 	}
-	public void setInfo(int info) {
+	public void setInfo(String info) {
 		this.info = info;
 	}
 	public Node getNextNode() {
@@ -167,11 +397,3 @@ class Node {
 	}
 	
 }
-
-//==================================================================================== //
-
-/*
-If the linked list has a loop :
-
-	1. The last node points to any of the previous nodes ( or to itself ).
-*/	

@@ -1,0 +1,14 @@
+
+public class Dog extends Canine{
+	
+	public void run(){
+		super();
+		System.out.println("Running really fast !!!");
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

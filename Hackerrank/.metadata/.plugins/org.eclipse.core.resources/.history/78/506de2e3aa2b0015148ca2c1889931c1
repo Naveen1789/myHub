@@ -1,0 +1,34 @@
+package introduction.welcomeToJava;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello World.\nHello Java.");
+		
+		Map<String, Double> linkedHashMap = new LinkedHashMap<String, Double>();
+		linkedHashMap.put("A", 1.00);
+		linkedHashMap.put("B", 2.00);
+		linkedHashMap.put("C", 3.00);
+		linkedHashMap.put("D", 4.00);
+		
+		Map<String, Double> hashMap = new HashMap<String, Double>();
+		hashMap.put("E", 5.00);
+		hashMap.put("F", 6.00);
+		hashMap.put("G", 7.00);
+		hashMap.put("H", 8.00);
+		
+		for (String key : linkedHashMap.keySet()) {
+				            System.out.println(key + ":\t" + linkedHashMap.get(key));
+		}
+		
+		for (String key : hashMap.keySet()) {
+            System.out.println(key + ":\t" + hashMap.get(key));
+		}
+	}
+
+}

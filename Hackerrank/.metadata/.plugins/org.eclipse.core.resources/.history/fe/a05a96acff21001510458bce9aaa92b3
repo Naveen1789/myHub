@@ -1,0 +1,25 @@
+package strings.javaStringToken;
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Solution {
+
+	
+	public static void main(String args[]){
+//
+//		Scanner in = new Scanner(System.in);
+//		
+//		String input = in.nextLine();
+		
+		String input = "cat cat cat cattie cat";
+
+		Pattern p = Pattern.compile("\\bcat\\b");
+		Matcher m = p.matcher(input);
+		
+		while(m.find()){
+			System.out.println(m.group());
+		}
+	}
+}

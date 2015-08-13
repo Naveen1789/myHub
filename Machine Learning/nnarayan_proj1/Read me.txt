@@ -1,0 +1,24 @@
+The project1.m file wraps up all the calls to other functions and .m files.
+This function takes no arguements but print out the following expected values :
+
+	M_cfs		Optimal model complextity derived from Closed Form Solution
+	lambda_cfs	Optimal Lambda derived from the Closed Form Solution
+	rms_cfs		Optimal ERM derived from testing the Testing data ( using the Closed Form Solution )
+
+	M_gd		Optimal model complextity derived from Stochastic Gradient Descent
+	lambda_gd	Optimal Lambda derived from Stochastic Gradient Descent
+	rms_gd		Optimal ERM derived from testing the Testing data ( using Stochastic Gradient Descent )
+
+
+train_cfs.m -	The train_cfs function takes no arguements, but returns the optimal M ( Model complexity ) and Lambda values.
+		The optimal W ( Weight Paramaters ), Mean Vector, S values are stored in the following files W_cfs, mu_cfs, s_cfs.
+
+test_cfs.m -	The test_cfs function takes in 4 arguements derived from the above fuction ( optimal values of W, M, Lambda and S) 
+		and computes the ERMS for the Testing data and return sthis value.
+
+train_gd.m -	The train_gd function takes optimal values of M and S derived from the train_cfs function and 
+		returns the optimal values of M, Lambda and W.
+		The optimal W ( Weight Paramaters ), Mean Vector, S values are stored in the following files W_gd, mu_gd, s_gd.
+
+test_gd.m -	The test_gd function takes in 4 arguements ( optimal values of W, M, Lambda and S) 
+		and computes the ERMS for the Testing data and return sthis value.

@@ -1,0 +1,23 @@
+package dataStructures.javaMap;
+
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in = new Scanner(System.in);
+		
+		int numOfEntries = in.nextInt();
+		
+		HashMap<String,String> phBook = HashMap<String,String>();
+		for(int i = 0; i < numOfEntries; i++){
+			String name = in.next();
+			String phNum = in.next();
+			
+			
+		}
+	}
+
+}
