@@ -1,0 +1,21 @@
+package trees.SwapNodesAlgo;
+
+import java.util.Scanner;
+
+class Tree {
+	
+	int data;
+	Tree leftSubTree;
+	Tree rightSubTree;
+	
+}
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in = new Scanner(System.in);
+	}
+
+}

@@ -1,0 +1,10 @@
+package chapter8;
+
+public class Two_Robot {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

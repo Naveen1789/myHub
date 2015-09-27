@@ -1,0 +1,46 @@
+package chapter1;
+
+public class Five_ReplaceCharInCharArray {
+	
+	public static char[] replaceChar(char[] charArr){
+		char toBeReplaced = ' ';
+		String replaceWith = "%20";
+		
+		if(charArr == null){
+			System.out.println("Input is null.");
+			return null;
+		}
+		
+		int numOfOccurrances = 0;
+		for(char c : charArr){
+			if(c == toBeReplaced){
+				numOfOccurrances++;
+			}
+		}
+		
+		int newArrLen = charArr.length + (numOfOccurrances * (replaceWith.length() - 1));
+		char[] cArrAfterReplacingChar = new char[newArrLen];
+		
+		int i = 0;
+		
+		for(char c : charArr){
+			if(c == toBeReplaced){
+				for(int j = 0; j < replaceWith.length(); j++){
+					cArrAfterReplacingChar[i+j] = replaceWith.charAt(j);
+				}
+				i = i+replaceWith.length();
+			}
+			else{
+				
+			}
+		}
+		
+		return cArrAfterReplacingChar;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,28 @@
+package operatingSystems.Caching;
+
+import java.util.ArrayList;
+
+public class LRU {
+
+	public int numOfMisses(int[] pageResuests, int cacheSize){
+		
+		int numOfRequests = pageResuests.length;
+		
+		ArrayList<Integer> cache = new ArrayList<Integer>();
+		
+		int numOfMisses = 0;
+		for(int i = 0; i < numOfRequests; i++){
+			
+			if((cache.size() < cacheSize) && (! cache.contains(pageResuests)[i])){
+				numOfMisses++;
+				cache.
+			}
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

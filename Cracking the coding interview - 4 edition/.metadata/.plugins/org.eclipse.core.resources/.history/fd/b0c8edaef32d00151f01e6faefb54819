@@ -1,0 +1,14 @@
+package chapter1;
+
+public class Seven_MatrixManipulation {
+	
+	public static int[][] manipulateMat(int[][] mat){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

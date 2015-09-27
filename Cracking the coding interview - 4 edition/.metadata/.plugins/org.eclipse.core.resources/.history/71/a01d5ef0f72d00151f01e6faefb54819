@@ -1,0 +1,14 @@
+package chapter1;
+
+public class Eight_RotatedString {
+	
+	public static boolean rotatedString(String s1, String s2){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

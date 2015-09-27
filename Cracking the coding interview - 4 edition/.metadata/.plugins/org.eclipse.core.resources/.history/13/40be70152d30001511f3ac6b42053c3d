@@ -1,0 +1,24 @@
+package otherSimpleAlgorithms;
+
+public class Stacks<T extends Object > {
+	
+	int size;
+	T top;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+// ==================================================================================== //
+
+class Item <T extends Object >{
+	T info;
+	Item<T> next;
+	
+	Item(T i){
+		this.info = i;
+	}
+}

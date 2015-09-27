@@ -1,0 +1,27 @@
+package operatingSystems.Scheduling;
+
+public class RoundRobin {
+	
+	public static int totalWorkToBeDone(int[] runTime){
+		int totalWorkLeft = 0;
+		for(){
+			
+		}
+		
+		return totalWorkLeft;
+	}
+	
+	public static void calcAvgWaitingTime(int[] runTime, int[] arrivalTime, int timeQuantum){
+		
+		int[] waitingTime = new int[runTime.length];
+		int time = arrivalTime[0];
+		
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

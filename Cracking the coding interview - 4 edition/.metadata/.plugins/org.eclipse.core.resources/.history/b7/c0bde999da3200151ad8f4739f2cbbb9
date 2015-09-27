@@ -1,0 +1,54 @@
+package chapter8;
+
+import java.util.ArrayList;
+
+public class Three_AllSubsetsOfASet {
+	
+	public static ArrayList<ArrayList<Integer>> getAllSubsets(ArrayList<Integer> set){
+		
+		if(set.size() == 0){
+			
+			ArrayList<Integer> emptySubset = new ArrayList<Integer>();
+			emptySubset.add(null);
+			ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
+			subSets.add(emptySubset);
+			return subSets;
+		}
+		else{
+			ArrayList<Integer> tempSet = new ArrayList<Integer>();
+			tempSet.addAll(set);
+			Integer temp = tempSet.remove(0);
+			System.out.println("set : "+ set);
+			System.out.println("tempSet : "+ tempSet);
+			// Integer temp = tempSet.remove((tempSet.size() - 1));
+			ArrayList<ArrayList<Integer>> subSets = getAllSubsets(tempSet);
+			ArrayList<ArrayList<Integer>> tempSubSets = new ArrayList<ArrayList<Integer>>();
+			tempSubSets.addAll(subSets);
+			
+			for(ArrayList<Integer> subSet : tempSubSets){
+				subSet.add(temp);
+			}
+			return subSets;
+		}
+		
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Integer> aList = new ArrayList<Integer>();
+		aList.add(1);
+//		aList.add(2);
+//		aList.add(3);
+//		aList.add(4);
+		
+		ArrayList<ArrayList<Integer>> allSubSets = getAllSubsets(aList);
+		
+		for(ArrayList<Integer> subSet : allSubSets){
+			System.out.println(subSet);
+		}
+
+	}
+
+}

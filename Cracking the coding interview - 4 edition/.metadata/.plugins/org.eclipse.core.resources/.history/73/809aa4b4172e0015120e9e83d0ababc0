@@ -1,0 +1,101 @@
+package otherSimpleAlgorithms;
+
+public class LinkedLists {
+
+}
+
+//==================================================================================== //
+
+class LinkedList {
+	
+	Node head ;
+	int size ;
+	
+	LinkedList () {
+		this.head = null ;
+		this.size = 0 ;
+	}
+
+	public Node getHead() {
+		return head;
+	}
+
+//	public void setHead(Node head) {
+//
+//	}
+
+	
+	public int getSize() {
+		return size;
+	}
+
+//	public void setSize(int size) {
+// 
+//	}
+
+	public void addNode ( Node n ) {
+		
+
+	}
+	
+	public void display () {
+		
+		displayFunc ( head ) ;
+		
+	}
+	
+	private void displayFunc ( Node n ) {
+		
+		if ( n.getNextNode() != null ) {
+			System.out.print(n.getInfo() + "\t");
+			displayFunc(n.getNextNode());
+		}
+		else {
+			System.out.println(n.getInfo());
+			return ;
+		}
+//		do {
+//		System.out.println(n.getInfo());
+//		displayFunc(n.getNextNode());
+//		}while ( n.getNextNode() != null );
+		
+	}
+		
+}
+
+//==================================================================================== //
+
+class Node {
+	
+	String info ;
+	Node nextNode ;
+	
+	Node ( String info , Node next ) {
+		this.info = info ;
+		this.nextNode = next ;
+	}
+	
+	Node ( String info ) {
+		this.info = info ;
+		this.nextNode = null ;
+	}
+	
+	Node () {
+		this.info = 0 ;
+		this.nextNode = null ;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public Node getNextNode() {
+		return nextNode;
+	}
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
+	}
+	
+}

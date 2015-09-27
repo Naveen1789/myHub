@@ -1,0 +1,10 @@
+package chapter1;
+
+public class Four_Anagrams {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

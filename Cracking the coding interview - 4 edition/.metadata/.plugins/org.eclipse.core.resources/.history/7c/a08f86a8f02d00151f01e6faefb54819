@@ -1,0 +1,25 @@
+package chapter1;
+
+public class Five_ReplaceCharInCharArray {
+	
+	public static char[] replaceChar(char[] charArr){
+		char toBeReplaced = ' ';
+		String replaceWith = "%20";
+		
+		int numOfOccurrances = 0;
+		for(char c : charArr){
+			if(c == toBeReplaced){
+				numOfOccurrances++;
+			}
+		}
+		
+		int newArrLen = charArr.length + (numOfOccurrances * (replaceWith.length() - 1));
+		char[] cArrAfterReplacingChar = 
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

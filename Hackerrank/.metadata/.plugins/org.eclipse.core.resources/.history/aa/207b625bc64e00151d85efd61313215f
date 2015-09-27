@@ -1,0 +1,39 @@
+package stacks.largestRectangle;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in = new Scanner(System.in);
+		
+		int n = Integer.parseInt(in.nextLine());
+		int[] arr = new int[n];
+		
+		String[] strArr = in.nextLine().split(" ");
+		for(int i = 0 ; i < n ; i++){
+			arr[i] = Integer.parseInt(strArr[i]);
+		}
+
+		Stack<Integer> stk = new Stack<Integer>();
+		int maxArea = 0;
+		int width = 0;
+		for(int i = 0; i < n ; i++){
+			if((stk.isEmpty()) || (arr[i] < stk.peek())){			
+				stk.push(arr[i]);
+			}
+			else{
+				width = (stk.isEmpty()) ? i : 0;
+				if(stk.isEmpty()){
+					width = i;
+				}
+			}
+		}
+	}
+
+}

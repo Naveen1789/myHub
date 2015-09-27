@@ -1,0 +1,128 @@
+package otherSimpleAlgorithms;
+
+public class LinkedLists {
+	
+	public static void main(String args[]){
+		LinkedList l1 = new LinkedList();
+		l1.addNode("a");
+		l1.addNode("b");
+		l1.addNode("c");
+		l1.addNode("d");
+	}
+
+}
+
+//==================================================================================== //
+
+class LinkedList {
+	
+	Node head ;
+	int size ;
+	
+	LinkedList () {
+		this.head = null ;
+		this.size = 0 ;
+	}
+
+	public Node getHead() {
+		return head;
+	}
+
+//	public void setHead(Node head) {
+//
+//	}
+
+	
+	public int getSize() {
+		return size;
+	}
+
+//	public void setSize(int size) {
+// 
+//	}
+
+	public void addNode ( String str ) {
+		
+		Node n = new Node(str);
+		// If the LL is empty, this will be the first node
+		if(this.size == 0){
+			this.head = null ;
+			this.size = 1;
+		}
+		// Add this node to the end of the LL
+		else{
+			int i = this.size;
+			Node curNode = head;
+			while(i> 1){
+				curNode = curNode.nextNode;
+				i--;
+			}
+			curNode.nextNode = n;
+			this.size++;
+		}
+
+	}
+	
+	public void display () {
+		
+		displayFunc ( head ) ;
+		
+	}
+	
+	private void displayFunc ( Node n ) {
+		
+		if ( n.getNextNode() != null ) {
+			System.out.print(n.getInfo() + "\t");
+			displayFunc(n.getNextNode());
+		}
+		else {
+			System.out.println(n.getInfo());
+			return ;
+		}
+//		do {
+//		System.out.println(n.getInfo());
+//		displayFunc(n.getNextNode());
+//		}while ( n.getNextNode() != null );
+		
+	}
+		
+}
+
+//==================================================================================== //
+
+class Node {
+	
+	String info ;
+	Node nextNode ;
+	// int index;
+	// Index in the LL
+	
+	Node ( String info , Node next ) {
+		this.info = info ;
+		this.nextNode = next ;
+	}
+	
+	Node ( String info ) {
+		this.info = info ;
+		this.nextNode = null ;
+	}
+	
+	Node () {
+		this.info = "" ;
+		this.nextNode = null ;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public Node getNextNode() {
+		return nextNode;
+	}
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
+	}
+	
+}

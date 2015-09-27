@@ -1,0 +1,30 @@
+package chapter8;
+
+import java.util.ArrayList;
+
+public class Three_AllSubsetsOfASet {
+	
+	public static ArrayList<Integer> getAllSubsets(ArrayList<Integer> set){
+		
+		if(set.size() == 0){
+			return null;
+		}
+		
+		if(set.size() == 1){
+			System.out.println(set.get(0));
+			return set;
+		}
+		for(int i = 0 ; i < set.size() ; i++){
+			
+		}
+		return null;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Integer> aList = { 1, 2, 3, 4 };
+
+	}
+
+}

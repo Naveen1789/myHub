@@ -1,0 +1,68 @@
+package chapter8;
+
+public class Eight_nQueens {
+	
+	public boolean rowOccupied(int[][] board, int row, int n){
+		for(int i = 0; i < n; i++){
+			if(board[row][i] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean colOccupied(int[][] board, int col, int n){
+		for(int i = 0; i < n; i++){
+			if(board[i][col] == 1){
+				return true;
+			}
+		}		
+		return false;
+	}
+	
+	public boolean diagOccupied(int[][] board, int row, int col, int n){
+		for(int r = row-1, c = col-1; ( r >= 0 & c >= 0 ); r--,c-- ){
+			System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		for(int r = row+1, c = col+1; ( r < n & c < n ); r++,c++ ){
+			System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void findSol(int[][] board, int queen, int n ){
+		
+		int[][] tempBoard = new int[n][n];
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tempBoard[i][j] = board[i][j];
+			}
+		}
+		
+		for(int i = 0; i < n; i++){
+			if( (! rowOccupied(tempBoard,queen,n)) && (! colOccupied(tempBoard,i,n)) && (! diagOccupied(tempBoard, queen,i,n))){
+				tempBoard[queen][i] = 1;
+			}
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int n = 8;
+		int[][] board = new int[n][n];
+		Eight_nQueens demo = new Eight_nQueens();
+		demo.diagOccupied(board,2,3,8);
+	}
+
+}

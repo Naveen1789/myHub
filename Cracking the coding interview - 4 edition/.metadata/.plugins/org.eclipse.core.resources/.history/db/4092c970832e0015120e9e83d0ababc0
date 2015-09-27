@@ -1,0 +1,290 @@
+package otherSimpleAlgorithms;
+
+
+public class LinkedLists {
+	
+	public static void main(String args[]){
+		
+
+		
+		LinkedList l1 = new LinkedList();
+		l1.addNode("a");
+		l1.addNode("b");
+//		l1.addNode("c");
+		l1.addNode("d");
+		l1.addNode("e");
+		l1.addNode("f");
+		
+		l1.addNode("h");
+//		l1.display();
+		 
+		l1.addNode(2,"c"); 
+		l1.addNode(6,"g");
+		l1.addFirst("*");
+		l1.addFirst("**");
+		l1.addFirst("***");
+		l1.deleteFirst();
+		l1.deleteLast();
+		l1.deleteLast();
+		l1.addLast("g");
+		l1.display();
+		
+		// l1.display(3);
+	}
+
+}
+
+//==================================================================================== //
+
+class LinkedList {
+	
+	Node head ;
+	int size ;
+	
+	LinkedList () {
+		this.head = null ;
+		this.size = 0 ;
+	}
+
+	public Node getHead() {
+		return head;
+	}
+
+//	public void setHead(Node head) {
+//
+//	}
+
+	
+	public int getSize() {
+		return size;
+	}
+
+//	public void setSize(int size) {
+// 
+//	}
+
+	public void addNode ( String str ) {
+		
+		Node n = new Node(str);
+		// If the LL is empty, this will be the first node
+		if(this.size == 0){
+			this.head = n ;
+			this.size = 1;
+		}
+		// Add this node to the end of the LL
+		else{
+			int curPtr = 0;
+			Node curNode = head;
+			while(curPtr<(this.size-1)){
+				curNode = curNode.nextNode;
+				curPtr++;
+			}
+			curNode.nextNode = n;
+			this.size++;
+		}
+
+	}
+	
+	public void addNode (int index, String str) {
+		
+		/*
+		 * 
+		 * index cannot be larger than size of the array list
+		LinkedList<Integer> l = new LinkedList<Integer>();
+		
+		l.add(17);
+		l.add(22);
+		
+		l.add(1,49);
+		// l.add(5,49);
+		
+		Iterator it = l.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+		 */
+		
+		if(index >= this.size){
+			System.out.println("Index is out of range.");
+			return;
+		}
+		
+		Node curNode = this.head;
+		
+		int curPtr = 0;
+		
+		while(curPtr < (index-1)){
+			curNode = curNode.nextNode;
+			curPtr++;
+		}
+		
+		Node tempNode = curNode.nextNode;
+		
+		Node n = new Node(str);
+		curNode.nextNode = n;
+		
+		n.nextNode = tempNode;
+		this.size++;
+
+	}
+	
+	public void addFirst ( String str ) {
+		
+		Node n = new Node(str);
+		n.nextNode = this.head;
+		
+		this.head = n;
+		this.size++;
+
+	}
+	
+	public void addLast ( String str ) {
+		
+		this.addNode(str);
+
+	}
+	
+	public void deleteFirst(){
+		if(this.size <= 0){
+			System.out.println("Linked List is empty.");
+			return;
+		}
+		this.head = head.nextNode;
+		this.size--;
+	}
+	
+	public void deleteLast(){
+		
+		if(this.size <= 0){
+			System.out.println("Linked List is empty.");
+			return;
+		}
+		
+		int curPtr = 0;
+		Node curNode = head;
+		while(curPtr<(this.size-2)){
+			curNode = curNode.nextNode;
+			curPtr++;
+		}
+		curNode.nextNode = null;
+		this.size--;
+		
+	}
+	
+	public void deleteNode(int index){
+		
+		if(index < 0 || index >= this.size){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		int curPtr = 0;
+		Node curNode = head;
+		while(curPtr<(index)){
+			curNode = curNode.nextNode;
+			curPtr++;
+		}
+		curNode.nextNode = null;
+		this.size--;
+		
+	}
+	public void deleteNode(String str){
+		
+	}
+	
+	public void display () {
+		
+		Node curNode = this.head;
+		
+		int i = 1;
+		while(i <= this.size ){
+			System.out.println(curNode.getInfo());
+			i++;
+			curNode = curNode.nextNode;
+		}
+	}
+	
+	public void display (int start, int last) {
+			
+		if(start < 0 || last < 0 || start > (this.size - 1) || last > (this.size - 1)){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		Node curNode = this.head;
+		
+		int i = 0;
+		while(i < start ){
+			curNode = curNode.nextNode;
+			i++;
+		}
+			
+		while(i <= last ){
+			System.out.println(curNode.getInfo());
+			i++;
+			curNode = curNode.nextNode;
+		}
+	}
+	
+	public void display (int start) {
+		
+		if(start < 0 || start > (this.size - 1)){
+			System.out.println("Index out of range.");
+			return;
+		}
+		
+		Node curNode = this.head;
+		
+		int i = 0;
+		while(i < start ){
+			curNode = curNode.nextNode;
+			i++;
+		}
+			
+		while(i < this.size ){
+			System.out.println(curNode.getInfo());
+			i++;
+			curNode = curNode.nextNode;
+		}
+	}
+			
+}
+
+//==================================================================================== //
+
+class Node {
+	
+	String info ;
+	Node nextNode ;
+	// int index;
+	// Index in the LL
+	
+	Node ( String info , Node next ) {
+		this.info = info ;
+		this.nextNode = next ;
+	}
+	
+	Node ( String info ) {
+		this.info = info ;
+		this.nextNode = null ;
+	}
+	
+	Node () {
+		this.info = "" ;
+		this.nextNode = null ;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public Node getNextNode() {
+		return nextNode;
+	}
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
+	}
+	
+}

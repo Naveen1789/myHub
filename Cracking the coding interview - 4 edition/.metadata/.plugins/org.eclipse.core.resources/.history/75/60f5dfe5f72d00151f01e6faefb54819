@@ -1,0 +1,10 @@
+package chapter1;
+
+public class Eight_RotatedString {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

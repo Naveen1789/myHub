@@ -1,0 +1,71 @@
+package otherSimpleAlgorithms;
+
+public class Stacks<T extends Object > {
+	
+	int capacity;
+	int size;
+	Item<T> top;
+	
+	Stacks(int cap){
+		this.capacity = cap;
+	}
+	
+	public boolean push(T t){
+		if(size < capacity){
+			Item<T> i = new Item<T>(t);
+			i.next = top;
+			top = i;
+			size++;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public T pop(){
+		if(this.top == null){
+			return null;
+		}
+		else{
+			Item<T> temp = top;
+			top = top.next;
+			return temp;
+		}
+	}
+	
+	public void display(){
+		
+		Item<T> curItem = this.top;
+		int curPtr = 0;
+		while(curPtr <= (this.size-1)){
+			System.out.print(curItem.info + "\t");
+			curItem = curItem.next;
+			curPtr++;
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Stacks<String> stkOfStrings = new Stacks<String>(2);
+		stkOfStrings.push("a");
+		stkOfStrings.push("c");
+		stkOfStrings.push("e");
+		System.out.println(stkOfStrings.size);
+		stkOfStrings.display();
+	}
+
+}
+
+// ==================================================================================== //
+
+class Item <T extends Object >{
+	T info;
+	Item<T> next;
+	
+	Item(T i){
+		this.info = i;
+		this.next = null;
+	}
+}

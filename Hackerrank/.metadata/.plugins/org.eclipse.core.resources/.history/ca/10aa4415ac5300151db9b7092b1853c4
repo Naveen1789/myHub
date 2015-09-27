@@ -1,0 +1,22 @@
+package operatingSystems.Caching;
+
+import java.util.ArrayList;
+
+public class LRU {
+
+	public int numOfMisses(int[] pageResuests, int cacheSize){
+		
+		int numOfRequests = pageResuests.length;
+		
+		ArrayList<Integer> cache = new ArrayList<Integer>();
+		for(int i = 0; i < numOfRequests; i++){
+			
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

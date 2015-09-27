@@ -1,0 +1,44 @@
+package chapter8;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Five_BalancedParantheses {
+	
+	public static HashSet<ArrayList<String>> balancedParantheses(int n){
+		
+		if(n == 1){
+			ArrayList<String> output = new ArrayList<String>();
+			output.add("(");
+			output.add(")");
+			HashSet<ArrayList<String>> outputs = new HashSet<ArrayList<String>>();
+			outputs.add(output);
+		}
+		
+		HashSet<ArrayList<String>> outputs = balancedParantheses(n-1);
+		
+		HashSet<ArrayList<String>> temp = new HashSet<ArrayList<String>>();
+		
+		for(ArrayList<String> output : outputs){
+			for(int i = 0; i < output.size(); i++){
+				ArrayList<String> tempList = output;
+				tempList.add(i,")");
+				tempList.add(i,"(");
+				temp.add(tempList);
+			}
+			ArrayList<String> tempList = output;
+			tempList.add("(");
+			tempList.add(")");
+			temp.add(tempList);
+			
+			
+		}
+		return tempList;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

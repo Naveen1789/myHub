@@ -1,0 +1,14 @@
+package chapter8;
+
+public class Three_AllSubsetsOfASet {
+	
+	public static void getAllSubsets(ArrayList<Integer> set){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

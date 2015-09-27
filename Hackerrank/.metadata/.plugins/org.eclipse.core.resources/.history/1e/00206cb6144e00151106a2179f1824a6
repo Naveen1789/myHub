@@ -1,0 +1,36 @@
+package trees.SwapNodesAlgo;
+
+import java.util.Scanner;
+
+class Tree {
+	
+	int data;
+	Tree leftSubTree;
+	Tree rightSubTree;
+	
+}
+
+
+
+public class Solution {
+	
+	String traverseInInorder(Tree n, String str){
+	    if(n == null){
+	        return str;
+	    }
+	    else{
+	        
+	        str = traverseInInorder(n.leftSubTree,str);
+	        str = str + " " + n.data;
+	        str = traverseInInorder(n.rightSubTree,str);
+	        return str;
+	    }
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in = new Scanner(System.in);
+	}
+
+}

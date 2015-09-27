@@ -1,0 +1,88 @@
+package chapter1;
+
+import java.util.Stack;
+
+public class Two_ReverseCStyleString {
+	
+	public static String reverseCString(String input){
+		
+		if(input == null){
+			System.out.println("Input is null.");
+			return null;
+		}
+		else if(input.length() == 0){
+			System.out.println("Input is an empty String.");
+			return "";
+		}
+		
+		String reversedString = "";
+		int strLen = input.length();
+		for(int i = 0; i < strLen; i++){
+			reversedString = input.charAt(i) + reversedString;
+		}
+		return reversedString;
+	}
+	
+	public static String reverseCStringUsingStacks(String input){
+		
+		if(input == null){
+			System.out.println("Input is null.");
+			return null;
+		}
+		else if(input.length() == 0){
+			System.out.println("Input is an empty String.");
+			return "";
+		}
+		
+		String reversedString = "";
+		Stack<Character> stk = new Stack<Character>();
+		int strLen = input.length();
+		for(int i = 0; i < strLen; i++){
+			stk.push(input.charAt(i));
+		}
+		
+		while(! stk.empty()){
+			reversedString = reversedString + stk.pop();
+		}
+		return reversedString;
+	}
+
+	public static String reverseCStringUsing2Pointers(String input){
+		if(input == null){
+			System.out.println("Input is null.");
+			return null;
+		}
+		else if(input.length() == 0){
+			System.out.println("Input is an empty String.");
+			return "";
+		}
+
+		int strLen = input.length();
+		char[] cArr = new char[strLen];
+		for(int i = 0; i < strLen; i++){
+			cArr[i] = input.charAt(i);
+		}
+		
+		int i = 0;
+		int j = strLen - 1;
+		char temp;
+		while(i<j){
+			temp = cArr[i];
+			cArr[i] = cArr[j];
+			cArr[j] = temp;
+			i++;
+			j--;
+		}
+		String reversedString = new String(cArr);
+		return reversedString;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		System.out.println(1 << 1);
+//		System.out.println(reverseCString("abc"));
+//		System.out.println(reverseCStringUsingStacks("def"));
+//		System.out.println(reverseCStringUsing2Pointers("ghi"));
+	}
+
+}

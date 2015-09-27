@@ -1,0 +1,38 @@
+package chapter1;
+
+import java.util.HashMap;
+
+public class Four_Anagrams {
+	
+	public static boolean usingHashTable(String input1, String input2){
+		if(input1 == null || input2 == null){
+			System.out.println("Input cannot be null.");
+			return false;
+		}
+		else if(input1.length() == 0 || input2.length() == 0){
+			System.out.println("Input cannot be an empty String.");
+			return false;
+		}
+		
+		int str1Len = input1.length();
+		int str2Len = input2.length();
+
+		if(str1Len!=str2Len){
+			System.out.println("Inputs are not of same length.");
+			return false;
+		}
+		
+		HashMap<Character,Integer> hMap= new HashMap<Character,Integer>();
+		for(int i = 0; i < str1Len; i++){
+			if(hMap.containsKey(input1.charAt(i))){
+				hMap.put(input1.charAt(i), ( hMap.get(input1.charAt(i)) + 1 ) ); 
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,16 @@
+package chapter8;
+
+import java.util.ArrayList;
+
+public class Three_AllSubsetsOfASet {
+	
+	public static ArrayList<Integer> getAllSubsets(ArrayList<Integer> set){
+		return null;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

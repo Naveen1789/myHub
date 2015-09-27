@@ -1,0 +1,25 @@
+package chapter1;
+
+public class Seven_MatrixManipulation {
+	
+	public static int[][] manipulateMat(int[][] mat){
+		
+		int row = mat.length;
+		int col = mat[0].length;
+		
+		HashSet<Integer> rowHashSet = new HashSet<Integer>();
+		for(int i = 0 ; i < row ; i++){
+			for(int j = 0 ; j < col ; j++){
+				
+			}
+		}
+		return null ;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[][] mat1 = {{1,2},{3,4},{5,6}};
+		manipulateMat(mat1);
+	}
+
+}

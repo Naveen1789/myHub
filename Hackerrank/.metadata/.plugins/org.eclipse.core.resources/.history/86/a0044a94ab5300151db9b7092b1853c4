@@ -1,0 +1,13 @@
+package operatingSystems.Caching;
+
+public class LRU {
+
+	public int numOfMisses(int[] pageResuests, int cacheSize){
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

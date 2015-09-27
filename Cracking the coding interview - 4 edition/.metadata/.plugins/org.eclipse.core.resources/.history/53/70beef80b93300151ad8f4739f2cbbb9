@@ -1,0 +1,30 @@
+package chapter8;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Five_BalancedParantheses {
+	
+	public static HashSet<ArrayList<String>> balancedParantheses(int n){
+		
+		if(n == 1){
+			ArrayList<String> output = new ArrayList<String>();
+			output.add("(");
+			output.add(")");
+			HashSet<ArrayList<String>> outputs = new HashSet<ArrayList<String>>();
+			outputs.add(output);
+		}
+		
+		HashSet<ArrayList<String>> outputs = new HashSet<ArrayList<String>>();
+		
+		
+		balancedParantheses(n-1);
+		return null;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

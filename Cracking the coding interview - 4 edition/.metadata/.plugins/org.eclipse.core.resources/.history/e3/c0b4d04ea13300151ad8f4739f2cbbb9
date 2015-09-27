@@ -1,0 +1,39 @@
+package chapter8;
+
+public class Four_AllPermutationsOfAString {
+	
+	public static String generateAllPermutations( String str, int n ){
+		
+		if(str.length() == 1){
+			return str;
+		}
+		
+		for(int i = 0; i < str.length(); i++){
+			
+			String s = str.substring(i,(i+1));
+			
+			String temp = str.substring(0,(i)) + str.substring((i+1));
+			
+			System.out.println("str = " + str);
+			System.out.println("s = " + s);
+			System.out.println("temp = " + temp);
+			
+			String output = s + generateAllPermutations(temp,n);
+			if(output.length() == n){
+				System.out.println(output);
+			}
+
+		}
+		
+		 return null;
+	}
+
+	public static void main(String[] args) {
+		
+//		System.out.println("abc".substring(0,1));
+//		System.out.println("abc".substring(1,2));
+		// TODO Auto-generated method stub
+		System.out.println(generateAllPermutations("abcd", 3));
+	}
+
+}

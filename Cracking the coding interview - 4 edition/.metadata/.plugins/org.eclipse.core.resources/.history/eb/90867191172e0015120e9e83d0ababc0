@@ -1,0 +1,126 @@
+package otherSimpleAlgorithms;
+
+public class LinkedLists {
+
+}
+
+//==================================================================================== //
+
+class LinkedList {
+	
+	Node head ;
+	int size ;
+	
+	LinkedList () {
+		this.head = null ;
+		this.size = 0 ;
+	}
+
+	public Node getHead() {
+		return head;
+	}
+
+//	public void setHead(Node head) {
+//
+//	}
+
+	
+	public int getSize() {
+		return size;
+	}
+
+//	public void setSize(int size) {
+// 
+//	}
+
+	public void addNode ( Node n ) {
+		
+		if ( lastNode.getNextNode() == null ) {
+		
+			// Adding a stand alone Node.
+		if ( n.getNextNode() == null ) {	
+		lastNode.setNextNode(n) ;
+		size++ ;
+		
+		lastNode = n ;
+		}
+		
+		else {
+			
+			// Under Construction
+			
+//			int count = 0 ;
+//			
+//			while ( )
+			
+		}
+		
+		}
+		
+		else {
+			System.out.println("[ This linked list has a loop. ]");
+			System.out.println("Sorry.\nYou cannot add any more nodes.");
+		}
+	}
+	
+	public void display () {
+		
+		displayFunc ( head ) ;
+		
+	}
+	
+	private void displayFunc ( Node n ) {
+		
+		if ( n.getNextNode() != null ) {
+			System.out.print(n.getInfo() + "\t");
+			displayFunc(n.getNextNode());
+		}
+		else {
+			System.out.println(n.getInfo());
+			return ;
+		}
+//		do {
+//		System.out.println(n.getInfo());
+//		displayFunc(n.getNextNode());
+//		}while ( n.getNextNode() != null );
+		
+	}
+		
+}
+
+//==================================================================================== //
+
+class Node {
+	
+	int info ;
+	Node nextNode ;
+	
+	Node ( int info , Node next ) {
+		this.info = info ;
+		this.nextNode = next ;
+	}
+	
+	Node ( int info ) {
+		this.info = info ;
+		this.nextNode = null ;
+	}
+	
+	Node () {
+		this.info = 0 ;
+		this.nextNode = null ;
+	}
+	
+	public int getInfo() {
+		return info;
+	}
+	public void setInfo(int info) {
+		this.info = info;
+	}
+	public Node getNextNode() {
+		return nextNode;
+	}
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
+	}
+	
+}

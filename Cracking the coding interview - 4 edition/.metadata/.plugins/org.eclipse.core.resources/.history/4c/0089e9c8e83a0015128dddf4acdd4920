@@ -1,0 +1,17 @@
+package chapter8;
+
+public class Eight_nQueens {
+	
+	public static void findSol(){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int n = 4;
+		int[][] board = new int[4][4];
+
+	}
+
+}

@@ -1,0 +1,20 @@
+package operatingSystems.Caching;
+
+public class LRU {
+
+	public int numOfMisses(int[] pageResuests, int cacheSize){
+		
+		int numOfRequests = pageResuests.length;
+		
+		int[] cache = new int[cacheSize];
+		for(int i = 0; i < numOfRequests; i++){
+			
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

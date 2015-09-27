@@ -1,0 +1,103 @@
+package operatingSystems.Scheduling;
+
+public class RoundRobin {
+	
+	public static int sumOfAllElementsInAnArray(int[] runTime){
+		int sum = 0;
+		for(int i : runTime){
+			sum = sum + i;
+		}
+		
+		return sum;
+	}
+	
+	public static void calcAvgWaitingTime(int[] runTime, int[] arrivalTime, int timeQuantum){
+		
+		int numOfTasks = runTime.length;
+		
+		System.out.println("Number of tasks = " + numOfTasks);
+		int[] waitingTime = new int[numOfTasks];
+		
+		int workToBeDone = sumOfAllElementsInAnArray(runTime);
+		// System.out.println("workToBeDone = " + workToBeDone);
+		int curTask = 0;
+		int time = arrivalTime[0];
+		
+		
+		
+		int iteration = 0;
+		while(workToBeDone > 0){
+			iteration++;
+			System.out.println("Time = " + time);
+			System.out.println("Iteration # = " + iteration);
+			
+			if(runTime[curTask] > 0){
+				System.out.println("curTask = " + curTask);
+				// Task runs for the entire quantum
+				if(runTime[curTask] >= timeQuantum){
+					
+					// update waiting time for each task
+					
+					for(int i = 0 ; i < numOfTasks; i++){
+						if((i != curTask) && (runTime[i] > 0) && (arrivalTime[i] <= time)){
+							waitingTime[i] = waitingTime[i] + timeQuantum;
+						}
+						else if((i != curTask) && (runTime[i] > 0) && (arrivalTime[i] < (time + timeQuantum))){
+							waitingTime[i] = waitingTime[i] + (time + timeQuantum - arrivalTime[i]);
+						}
+					}
+					
+					// System.out.println("Task #" + curTask + " ran for "+ timeQuantum + "time units.");
+					
+					// update time
+					time = time + timeQuantum;
+					
+					// update remaining work to be done
+					workToBeDone = workToBeDone - timeQuantum;
+					
+					// update runtime of current task
+					runTime[curTask] = runTime[curTask] - timeQuantum;
+				}
+				// Task does not run for the entire quantum
+				else{
+					
+					for(int i = 0 ; i < numOfTasks; i++){
+						if((i != curTask) && (runTime[i] > 0) && (arrivalTime[i] <= time)){
+							waitingTime[i] = waitingTime[i] + timeQuantum - runTime[curTask];
+						}
+						else if((i != curTask) && (runTime[i] > 0) && (arrivalTime[i] < (time + timeQuantum - runTime[curTask]))){
+							waitingTime[i] = waitingTime[i] + (time + (timeQuantum - runTime[curTask]) - arrivalTime[i]);
+						}
+					}
+					// update time
+					time = time + timeQuantum - runTime[curTask];
+					
+					// update remaining work to be done
+					workToBeDone = workToBeDone - runTime[curTask];
+					
+					// update runtime of current task
+					runTime[curTask] = 0;
+
+				}
+				
+			}
+			
+			curTask = ( curTask + 1 ) % (numOfTasks);
+		}
+		
+		
+		float avgWaitingTime = (float)sumOfAllElementsInAnArray(waitingTime) / (float)numOfTasks;
+		System.out.println(avgWaitingTime);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int[] rt = {5,10,5};
+		int[] at = {0,0,0};
+		int tq = 5;
+		
+		calcAvgWaitingTime(rt,at,tq);
+	}
+
+}

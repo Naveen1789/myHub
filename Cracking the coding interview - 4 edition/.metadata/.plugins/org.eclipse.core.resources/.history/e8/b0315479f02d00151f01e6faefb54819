@@ -1,0 +1,15 @@
+package chapter1;
+
+public class Five_ReplaceCharInCharArray {
+	
+	public static char[] replaceChar(char[] charArr){
+		char toBeReplaced = ' ';
+		String replaceWith = "%20";
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

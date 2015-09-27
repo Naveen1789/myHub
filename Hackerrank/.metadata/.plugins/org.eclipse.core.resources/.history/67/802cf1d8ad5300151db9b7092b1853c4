@@ -1,0 +1,38 @@
+package operatingSystems.Caching;
+
+import java.util.ArrayList;
+
+public class LRU {
+
+	public int numOfMisses(int[] pageResuests, int cacheSize){
+		
+		int numOfRequests = pageResuests.length;
+		
+		ArrayList<Integer> cache = new ArrayList<Integer>();
+		
+		int numOfMisses = 0;
+		for(int i = 0; i < numOfRequests; i++){
+			
+			// If cache already contains the requested page, update the cache
+			// Make this task the most recently used
+			if(cache.contains(pageResuests[i])){
+				int index = cache.indexOf(pageResuests[i]);
+				cache.remove(index);
+				cache.add(0,pageResuests[i]);
+			}
+			else{
+				numOfMisses++;
+				if((cache.size() < cacheSize)){
+					
+					cache.add(0,pageResuests[i]);
+				}
+			}
+		}
+		return numOfMisses;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

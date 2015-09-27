@@ -1,0 +1,45 @@
+package queues.TruckTour;
+
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		
+		int n = Integer.parseInt(in.nextLine());
+		int[] petrol = new int[n];
+		int[] distToNextBunk = new int[n];
+		
+		for(int i = 0; i < n; i++){
+			String[] strArr = in.nextLine().split(" ");
+			petrol[i] = Integer.parseInt(strArr[0]);
+			distToNextBunk[i] = Integer.parseInt(strArr[1]);
+		}
+		
+		int startingPoint = 0;
+		int remainingPetrol = 0;
+		int distShortBy = 0;
+		
+		for(int i = 0;  i < n; i++){
+			if((remainingPetrol + petrol[i]) >= distToNextBunk[i]){
+				remainingPetrol = remainingPetrol + petrol[i] - distToNextBunk[i];
+			}
+			else{
+				startingPoint = i + 1;
+				distShortBy = distShortBy + distToNextBunk[i] - (remainingPetrol + petrol[i]);
+				remainingPetrol = 0;
+			}
+		}
+		
+		if(remainingPetrol >= distShortBy){
+			System.out.println(startingPoint);
+		}
+		else{
+			System.out.println("can't travel the entirelength");
+		}
+		
+	}
+
+}

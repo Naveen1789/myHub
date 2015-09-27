@@ -1,0 +1,99 @@
+package chapter1;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Four_Anagrams {
+	
+	public static boolean usingHashTable(String input1, String input2){
+		if(input1 == null || input2 == null){
+			System.out.println("Input cannot be null.");
+			return false;
+		}
+		else if(input1.length() == 0 || input2.length() == 0){
+			System.out.println("Input cannot be an empty String.");
+			return false;
+		}
+		
+		int str1Len = input1.length();
+		int str2Len = input2.length();
+
+		if(str1Len!=str2Len){
+			System.out.println("Inputs are not of same length.");
+			return false;
+		}
+		
+		HashMap<Character,Integer> hMap= new HashMap<Character,Integer>();
+		
+		for(int i = 0; i < str1Len; i++){
+			if(hMap.containsKey(input1.charAt(i))){
+				hMap.put(input1.charAt(i), ( hMap.get(input1.charAt(i)) + 1 ) ); 
+			}
+			else{
+				hMap.put(input1.charAt(i), ( 1 ) ); 
+			}
+		}
+		
+		for(int i = 0; i < str2Len; i++){
+			if(hMap.containsKey(input2.charAt(i))){
+				hMap.put(input1.charAt(i), ( hMap.get(input1.charAt(i)) - 1 ) ); 
+			}
+			else{
+				return false;
+			}
+		}
+		
+		for (char c : hMap.keySet()) {
+			if(hMap.get(c) != 0){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	public static boolean usingCollectionsSort(String input1, String input2){
+		
+		int str1Len = input1.length();
+		ArrayList<Character> cArr1 = new ArrayList<Character>();
+		for(int i = 0; i < str1Len; i++){
+			cArr1.add(input1.charAt(i));
+		}
+		
+		int str2Len = input2.length();
+		ArrayList<Character> cArr2 = new ArrayList<Character>();
+		for(int i = 0; i < str2Len; i++){
+			cArr2.add(input1.charAt(i));
+		}
+		
+		Collections.sort(cArr1);
+		Collections.sort(cArr2);
+		
+		System.out.println(cArr1.toString());
+		System.out.println(cArr2.toString());
+		cArr1.toString();
+		cArr2.toString();
+		if(cArr1.toString().equals(cArr2.toString())){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+//		System.out.println(usingHashTable("abc","cba"));
+//		System.out.println(usingHashTable("abc","bac"));
+//		System.out.println(usingHashTable("abc","a"));
+//		System.out.println(usingHashTable("abc","def"));
+		
+		System.out.println(usingCollectionsSort("abc","cba"));
+		System.out.println(usingCollectionsSort("abc","bac"));
+		System.out.println(usingCollectionsSort("abc","a"));
+		System.out.println(usingCollectionsSort("abc","def"));
+	
+	}
+
+}

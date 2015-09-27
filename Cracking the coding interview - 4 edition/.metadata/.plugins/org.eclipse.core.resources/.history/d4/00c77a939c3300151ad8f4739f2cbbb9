@@ -1,0 +1,23 @@
+package chapter8;
+
+public class Four_AllPermutationsOfAString {
+	
+	public static String generateAllPermutations( String str ){
+		
+		for(int i = 0; i < str.length(); i++){
+			
+//			String s = str.charAt(i);
+//			for(int ){
+//				
+//			}
+		}
+		
+		return null;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(generateAllPermutations("abc"));
+	}
+
+}

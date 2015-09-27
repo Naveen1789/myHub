@@ -1,0 +1,65 @@
+package trees.SwapNodesAlgo;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+class Tree {
+	
+	int data;
+	Tree leftSubTree;
+	Tree rightSubTree;
+	
+}
+
+
+
+public class Solution {
+	
+	String traverseInInorder(Tree n, String str){
+	    if(n == null){
+	        return str;
+	    }
+	    else{
+	        
+	        str = traverseInInorder(n.leftSubTree,str);
+	        str = str + " " + n.data;
+	        str = traverseInInorder(n.rightSubTree,str);
+	        return str;
+	    }
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in = new Scanner(System.in);
+		
+		int numOfNodes = Integer.parseInt(in.nextLine());
+		
+		Queue<Tree> q = new LinkedList<Tree>();
+		
+		Tree head = new Tree();
+		head.leftSubTree = null;
+		head.rightSubTree = null;
+		
+		q.add(head);
+		
+		String[] tempArr = new String[2];
+		Tree tempTree = null;
+		for(int i = 0; i < numOfNodes; i++){
+			
+			tempArr = in.nextLine().split(" ");
+			
+			
+			// Make left sub tree
+			Tree lst = new Tree();
+			lst.data = Integer.parseInt(tempArr[0]);
+			lst.leftSubTree = null;
+			lst.rightSubTree = null;
+			
+			// Make right sub tree
+			
+		}
+	}
+
+}

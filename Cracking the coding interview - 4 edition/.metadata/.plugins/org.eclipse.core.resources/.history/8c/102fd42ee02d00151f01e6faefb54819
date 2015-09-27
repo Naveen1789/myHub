@@ -1,0 +1,33 @@
+package chapter1;
+
+public class Three_RemoveDuplicateChars {
+	
+	// Time Complexity - n^2
+	public static boolean removeDupChars(String input){
+		
+		if(input == null){
+			System.out.println("Input is null.");
+			return false;
+		}
+		else if(input.length() == 0){
+			System.out.println("Input is an empty String.");
+			return false;
+		}
+		
+		int strLen = input.length();
+		for(int i = 0; i < strLen; i++){
+			for(int j = (i+1); j < strLen; j++){
+				if(input.charAt(i)==input.charAt(j)){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

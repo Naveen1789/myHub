@@ -1,0 +1,54 @@
+package chapter8;
+
+public class Eight_nQueens {
+	
+	public boolean rowOccupied(int[][] board, int row, int n){
+		for(int i = 0; i < n; i++){
+			if(board[row][i] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean colOccupied(int[][] board, int col, int n){
+		for(int i = 0; i < n; i++){
+			if(board[i][col] == 1){
+				return true;
+			}
+		}		
+		return false;
+	}
+	
+	public boolean diagOccupied(int[][] board, int row, int col, int n){
+		for(int r = row-1, c = col-1; ( r > 0 & c > 0 ); r--,c-- ){
+			System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		for(int r = row+1, c = col+1; ( r < n 0 & c < n ); r++,c++ ){
+			System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static void findSol(int[][] board, int queen ){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int n = 4;
+		int[][] board = new int[n][n];
+
+	}
+
+}

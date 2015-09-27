@@ -1,0 +1,42 @@
+package chapter1;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class Seven_MatrixManipulation {
+	
+	public static int[][] manipulateMat(int[][] mat){
+		
+		int row = mat.length;
+		int col = mat[0].length;
+		
+		HashSet<Integer> rowHashSet = new HashSet<Integer>();
+		HashSet<Integer> colHashSet = new HashSet<Integer>();
+		for(int i = 0 ; i < row ; i++){
+			for(int j = 0 ; j < col ; j++){
+				if(mat[i][j] == 0){
+					rowHashSet.add(i);
+					colHashSet.add(j);
+				}
+			}
+		}
+		
+		Iterator itr = rowHashSet.iterator();
+	      while(itr.hasNext()) {
+	         int r = (int) itr.next();
+	         
+	      }
+
+		
+		
+		
+		return null ;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[][] mat1 = {{1,2},{3,4},{5,0}};
+		manipulateMat(mat1);
+	}
+
+}

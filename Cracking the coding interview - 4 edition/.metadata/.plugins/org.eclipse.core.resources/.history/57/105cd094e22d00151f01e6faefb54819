@@ -1,0 +1,69 @@
+package chapter1;
+
+public class Three_RemoveDuplicateChars {
+	
+	// Time Complexity - n^2
+//	public static String removeDupChars(String input){
+//		
+//		if(input == null){
+//			System.out.println("Input is null.");
+//			return null;
+//		}
+//		else if(input.length() == 0){
+//			System.out.println("Input is an empty String.");
+//			return "";
+//		}
+//		
+//		int strLen = input.length();
+//		char[] cArr = new char[strLen];
+//		for(int i = 0; i < strLen; i++){
+//			cArr[i] = input.charAt(i);
+//		}
+//		
+//		for(int i = 0; i < strLen; i++){
+//			for(int j = (i+1); j < strLen; j++){
+//				if(cArr[i]==cArr[j]){
+//					return false;
+//				}
+//			}
+//		}
+//		return "";
+//	}
+	
+	public static void removeDuplicates(String input) {
+		
+		int strLen = input.length();
+		char[] str = new char[strLen];
+		for(int i = 0; i < strLen; i++){
+			str[i] = input.charAt(i);
+		}
+		
+		
+		if (str == null) return;
+		int len = str.length;
+		if (len < 2) return;
+		
+		int tail = 1;
+		
+		for (int i = 1; i < len; ++i) {
+		int j;
+		for (j = 0; j < tail; ++j) {
+		if (str[i] == str[j]) break;
+		}
+		if (j == tail) {
+		str[tail] = str[i];
+		++tail;
+		}
+		str[tail] = 0;
+		}
+		
+		
+		System.out.println(str);
+		}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		removeDuplicates("abcaadb");
+	}
+
+}

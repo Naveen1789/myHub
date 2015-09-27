@@ -1,0 +1,25 @@
+package chapter8;
+
+public class Eight_nQueens {
+	
+	
+	int n ;
+	int[][] board = new int[n][n];
+	
+	public boolean checkRow(int[][] board, int row){
+		for(int i = 0; i < ){
+			
+		}
+	}
+	
+	public void findSol(int[][] board, int queen ){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+
+	}
+
+}

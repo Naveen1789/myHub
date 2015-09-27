@@ -1,0 +1,16 @@
+package chapter8;
+
+import java.util.ArrayList;
+
+public class Two_Robot {
+	
+	public static void robotPaths(int x, int y, ArrayList<String> paths){
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

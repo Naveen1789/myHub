@@ -1,0 +1,44 @@
+package stacks.poisonousPlants;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner in = new Scanner(System.in);
+		
+		int n = Integer.parseInt(in.nextLine());
+		// int[] arr = new int[n];
+		
+		String[] strArr = in.nextLine().split(" ");
+		
+		Stack<Integer> stk1 = new Stack<Integer>();
+		
+		for(int i = 0 ; i < n ; i++){
+			// arr[i] = ;
+			stk1.push(Integer.parseInt(strArr[i]));
+		}
+		
+		Stack<Integer> stk2 = new Stack<Integer>();
+		
+		boolean done = true;
+		
+		do{
+			
+		while(! stk1.isEmpty()){
+			
+			int temp = stk1.pop();
+			if(temp <= stk1.peek()  ){
+				stk2.push(temp);
+			}
+		}
+			
+			
+		}while(!done);
+
+	}
+
+}

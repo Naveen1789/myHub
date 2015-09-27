@@ -1,0 +1,112 @@
+package chapter8;
+
+import java.util.ArrayList;
+
+public class Eight_nQueens {
+	
+	public boolean rowOccupied(int[][] board, int row, int n){
+		for(int i = 0; i < n; i++){
+			if(board[row][i] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean colOccupied(int[][] board, int col, int n){
+		for(int i = 0; i < n; i++){
+			if(board[i][col] == 1){
+				return true;
+			}
+		}		
+		return false;
+	}
+	
+	public boolean diagOccupied(int[][] board, int row, int col, int n){
+		for(int r = row-1, c = col-1; ( r >= 0 & c >= 0 ); r--,c-- ){
+			// System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		for(int r = row+1, c = col+1; ( r < n & c < n ); r++,c++ ){
+			// System.out.println("r = " + r + ", c = " + c);
+			if(board[r][c] == 1){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean checkIfValid(int[][] board,int n){
+		
+		boolean valid = false;
+		int numOfQueens = 0;
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				if(board[i][j] == 1){
+					numOfQueens++;
+					break;
+				}
+			}
+		}
+
+		return (numOfQueens==8) ? true : false;
+		
+	}
+	public void findSol(int[][] board, int queen, int n, ArrayList<int[][]> solutions){
+		
+
+		
+		for(int i = 0; i < n; i++){
+			
+			int[][] tempBoard = new int[n][n];
+			for(int r = 0; r < n; r++){
+				for(int c = 0; c < n; c++){
+					tempBoard[r][c] = board[r][c];
+				}
+			}
+			
+			if( (! rowOccupied(tempBoard,queen,n)) && (! colOccupied(tempBoard,i,n)) && (! diagOccupied(tempBoard, queen,i,n))){
+				tempBoard[queen][i] = 1;
+				if(i == (n-1)){
+					solutions.add(tempBoard);
+				}
+				else{
+					findSol(tempBoard, (queen + 1), n, solutions );	
+				}
+				
+			}
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int n = 8;
+		int[][] board = new int[n][n];
+		Eight_nQueens demo = new Eight_nQueens();
+		// demo.diagOccupied(board,2,3,8);
+		ArrayList<int[][]> solutions = new ArrayList<int[][]>();
+		demo.findSol(board, 0, n, solutions);
+		
+		for(int[][] sol : solutions){
+			int numOfRows = sol.length;
+			int numOfCols = sol[0].length;
+			
+			for(int i = 0; i < numOfRows; i++){
+				for(int j = 0; j < numOfCols; j++){
+					System.out.print(sol[i][j] + "\t");
+				}
+				System.out.println();
+			}
+			
+			System.out.println("############################");
+		}
+	}
+
+}

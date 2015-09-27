@@ -1,0 +1,140 @@
+package otherSimpleAlgorithms;
+
+public class LinkedLists {
+	
+	public static void main(String args[]){
+		LinkedList l1 = new LinkedList();
+		l1.addNode("a");
+		l1.addNode("b");
+		l1.addNode("c");
+		l1.addNode("d");
+		l1.display();
+	}
+
+}
+
+//==================================================================================== //
+
+class LinkedList {
+	
+	Node head ;
+	int size ;
+	
+	LinkedList () {
+		this.head = null ;
+		this.size = 0 ;
+	}
+
+	public Node getHead() {
+		return head;
+	}
+
+//	public void setHead(Node head) {
+//
+//	}
+
+	
+	public int getSize() {
+		return size;
+	}
+
+//	public void setSize(int size) {
+// 
+//	}
+
+	public void addNode ( String str ) {
+		
+		Node n = new Node(str);
+		// If the LL is empty, this will be the first node
+		if(this.size == 0){
+			this.head = n ;
+			this.size = 1;
+		}
+		// Add this node to the end of the LL
+		else{
+			int i = 1;
+			Node curNode = head;
+			while(i<this.size){
+				curNode = curNode.nextNode;
+				i++;
+			}
+			curNode.nextNode = n;
+			this.size++;
+		}
+
+	}
+	
+	public void display () {
+		
+		Node curNode = this.head;
+		
+		int i = 1;
+		while(i <= this.size ){
+			System.out.println(curNode.getInfo());
+			i++;
+			curNode = curNode.nextNode;
+		}
+	}
+	
+	public void display (int start, int last) {
+		
+		Node curNode = this.head;
+		
+		int i = 1;
+		while(i <= start ){
+			curNode = curNode.nextNode;
+		}
+		
+		while(){
+			
+		}
+		int i = 1;
+		while(i <= this.size ){
+			System.out.println(curNode.getInfo());
+			i++;
+			curNode = curNode.nextNode;
+		}
+	}
+	
+
+		
+}
+
+//==================================================================================== //
+
+class Node {
+	
+	String info ;
+	Node nextNode ;
+	// int index;
+	// Index in the LL
+	
+	Node ( String info , Node next ) {
+		this.info = info ;
+		this.nextNode = next ;
+	}
+	
+	Node ( String info ) {
+		this.info = info ;
+		this.nextNode = null ;
+	}
+	
+	Node () {
+		this.info = "" ;
+		this.nextNode = null ;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public Node getNextNode() {
+		return nextNode;
+	}
+	public void setNextNode(Node nextNode) {
+		this.nextNode = nextNode;
+	}
+	
+}
